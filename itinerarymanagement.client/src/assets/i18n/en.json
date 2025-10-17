@@ -1,0 +1,114 @@
+{
+  "FEATURES": {
+    "TITLE": "Our Key Features",
+    "SIMPLE_PLANNING": {
+      "TITLE": "Simple Planning",
+      "DESC": "Create your itinerary in a few clicks. Add destinations, activities, and notes."
+    },
+    "INTERACTIVE_MAPS": {
+      "TITLE": "Interactive Maps",
+      "DESC": "Explore your destinations using interactive maps and find the best routes."
+    },
+    "NOTIFICATIONS": {
+      "TITLE": "Alerts and Notifications",
+      "DESC": "Stay informed about changes in your plan and receive important notices."
+    },
+    "AI_SEARCH": {
+      "TITLE": "Smart AI Search",
+      "DESC": "Use artificial intelligence to recommend places based on your preferences."
+    },
+    "CTA": "Start Planning"
+  },
+  "FOOTER": "&copy; Jiří Gengela 2025. All rights reserved.",
+  "NAV": {
+    "HOME": "Home",
+    "PROJECTS": "Projects",
+    "EDIT_PROFILE": "Edit Profile",
+    "LOGOUT": "Log Out",
+    "LOGIN": "Login"
+  },
+  "PROJECTS": {
+    "TITLE": "Project List",
+    "ADD_TOOLTIP": "Add project",
+    "HIDE": "Hide projects",
+    "SHOW": "Show projects",
+    "COUNT": "projects",
+    "MORE_TOOLTIP": "More",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "NONE_FOUND": "No projects found."
+  },
+  "PLAN": {
+    "TITLE_EDIT": "Edit plan",
+    "TITLE_CREATE": "Trip planning",
+    "DESTINATION": "Where to?",
+    "DESTINATION_PLACEHOLDER": "Paris, Prague, Japan",
+    "DESTINATION_REQUIRED": "Destination is required.",
+    "DESTINATION_MAXLENGTH": "Destination must not exceed 100 characters.",
+    "DATE_RANGE": "Date from - to",
+    "START_DATE_REQUIRED": "Start date is required.",
+    "END_DATE_REQUIRED": "End date is required.",
+    "DATE_RANGE_INVALID": "Start date must be before end date.",
+    "UPLOAD_TOOLTIP": "Upload image",
+    "BUTTON_SAVE": "Save changes",
+    "BUTTON_START": "Start planning"
+  },
+  "REGISTER": {
+    "TITLE": "Register",
+    "USERNAME_LABEL": "Username",
+    "USERNAME_PLACEHOLDER": "Enter your username",
+    "USERNAME_REQUIRED": "Username is required.",
+    "USERNAME_MINLENGTH": "Username must be at least 3 characters.",
+    "USERNAME_MAXLENGTH": "Username cannot be longer than 100 characters.",
+    "PASSWORD_LABEL": "Password",
+    "PASSWORD_PLACEHOLDER": "Enter your password",
+    "PASSWORD_REQUIRED": "Password is required.",
+    "PASSWORD_MINLENGTH": "Password must be at least 6 characters.",
+    "FIRSTNAME_LABEL": "First Name",
+    "FIRSTNAME_PLACEHOLDER": "Enter your first name",
+    "FIRSTNAME_REQUIRED": "First name is required.",
+    "LASTNAME_LABEL": "Last Name",
+    "LASTNAME_PLACEHOLDER": "Enter your last name",
+    "LASTNAME_REQUIRED": "Last name is required.",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_PLACEHOLDER": "Enter your email",
+    "EMAIL_REQUIRED": "Email is required.",
+    "EMAIL_INVALID": "Invalid email format.",
+    "BUTTON_SUBMIT": "Register",
+    "HAVE_ACCOUNT": "Already have an account?",
+    "LOGIN_LINK": "Login"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Reset Password",
+    "NEW_PASSWORD_LABEL": "New Password",
+    "NEW_PASSWORD_PLACEHOLDER": "Enter new password",
+    "PASSWORD_REQUIRED": "Password is required.",
+    "PASSWORD_MINLENGTH": "Password must be at least 6 characters.",
+    "CONFIRM_PASSWORD_LABEL": "Confirm Password",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Enter password confirmation",
+    "CONFIRM_PASSWORD_REQUIRED": "Password confirmation is required.",
+    "PASSWORDS_MISMATCH": "Passwords do not match.",
+    "BUTTON_SUBMIT": "Reset Password",
+    "BACK_TO_LOGIN": "Back to Login"
+  },
+  "LOGIN": {
+    "TITLE": "Login",
+    "USERNAME_LABEL": "Username",
+    "USERNAME_REQUIRED": "Username is required.",
+    "PASSWORD_LABEL": "Password",
+    "PASSWORD_REQUIRED": "Password is required.",
+    "BUTTON_SUBMIT": "Log In",
+    "NO_ACCOUNT": "Don't have an account?",
+    "REGISTER_LINK": "Register",
+    "FORGOT_PASSWORD": "Forgot your password?"
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "Password Reset",
+    "INFO": "To reset your password, please enter your email. We will send you a link to reset your password.",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_REQUIRED": "Email is required.",
+    "EMAIL_INVALID": "Please enter a valid email.",
+    "SUBMIT_BUTTON": "Send reset code",
+    "BACK_TO_LOGIN": "Back to login"
+  }
+}

@@ -1,0 +1,129 @@
+<mat-dialog-content class="place-info">
+  <div class="dialog-content-wrapper">
+    <div class="place-info-left">
+      <button tabindex="-1" mat-dialog-close mat-icon-button aria-label="Close" class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+      <div class="place-title">
+        <h3>{{ place.title }}</h3>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="place-description">
+        <p><strong>Popis:</strong></p>
+        @if (place.description) {
+          <p>{{ place.description }}</p>
+        } @else {
+          <p>Popisek nebyl přidán.</p>
+        }
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="place-gps">
+        <p>
+          <strong>GPS: </strong>
+          <span>{{ formatLatitude(place.latitude) }}</span>,
+          <span>{{ formatLongitude(place.longitude) }}</span>
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      @if (place.visitDuration) {
+        <div class="place-visit-duration">
+          <p><strong>Odhadovaná doba návštěvy:</strong> {{ formatVisitDuration(place.visitDuration) }}</p>
+        </div>
+      }
+
+      <div class="divider"></div>
+
+      <div class="place-opening-hours">
+        <p><strong>Otevírací doba:</strong></p>
+        @if (place.openingHours) {
+          <p>{{ place.openingHours }}</p>
+        } @else {
+          <p>Otevírací doba nebyla přidána.</p>
+        }
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="place-website">
+        <p><strong>Webová stránka:</strong></p>
+        @if (place.website) {
+          <p>
+            <a rel="noopener noreferrer" [href]="place.website" target="_blank">{{ place.website }}</a>
+          </p>
+        } @else {
+          <p>Webová stránka nebyla přidána.</p>
+        }
+      </div>
+
+
+      <div class="divider"></div>
+
+      <div class="place-tags">
+        <p><strong>Štítky:</strong></p>
+        @if (place.tags && place.tags.length > 0) {
+          <div class="tags-container">
+            @for (tag of place.tags; track tag) {
+              <span class="tag" [ngStyle]="{ 'color': tag.color }">
+                {{ tag.name }}
+              </span>
+            }
+          </div>
+        } @else {
+          <p>Nebyly přidány žádné štítky.</p>
+        }
+      </div>
+
+
+      <div class="divider"></div>
+
+      <div class="place-itinerary-day">
+        <p><strong>Dny v itineráři:</strong></p>
+        @if (assignedDays.length > 0) {
+          <p>
+            {{ getAssignedDaysString() }}
+          </p>
+        } @else {
+          <p>Místo není přiřazeno do žádného dne v itineráři.</p>
+        }
+      </div>
+
+
+      <div class="divider"></div>
+
+      @if (place.placeImages && place.placeImages.length > 0) {
+        <div class="place-images">
+          <div class="images-container">
+            @for (image of place.placeImages; track image; let i = $index) {
+              <img
+                [src]="apiUrl + image.id + '?width=0&height=0&maxWidth=300&maxHeight=300'"
+                alt="Obrázek místa"
+                class="place-image"
+                (click)="openLightbox(i)" />
+            }
+          </div>
+        </div>
+      }
+
+
+      <div class="dialog-actions-container">
+        <mat-dialog-actions>
+          <div class="dialog-buttons">
+            <button tabindex="-1" mat-button color="primary" class="action-button" mat-dialog-close>
+              Zavřít
+            </button>
+          </div>
+        </mat-dialog-actions>
+      </div>
+    </div>
+
+    <div class="place-info-right">
+      <div tabindex="-1" id="map-dialog" class="map-container"></div>
+    </div>
+  </div>
+</mat-dialog-content>

@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>
+  Vyhledat místa pomocí AI
+  <button tabindex="-1" mat-icon-button mat-dialog-close aria-label="Close" class="close-button">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="aiQueryForm">
+    <mat-form-field>
+      <mat-label>Co vás zajímá?</mat-label>
+      <input matInput formControlName="query" placeholder="Např. turistická místa" maxlength="200">
+      <mat-hint align="end">{{ aiQueryForm.get('query')?.value?.length || 0 }}/200</mat-hint>
+
+      @if (aiQueryForm.get('query')?.hasError('required')) {
+        <mat-error>
+          Toto pole je povinné.
+        </mat-error>
+      }
+      @if (aiQueryForm.get('query')?.hasError('maxlength')) {
+        <mat-error>
+          Maximální délka je 200 znaků.
+        </mat-error>
+      }
+      @if (aiQueryForm.get('query')?.hasError('pattern')) {
+        <mat-error>
+          Povolené znaky: písmena, čísla, mezery, čárky, tečky, pomlčky a závorky.
+        </mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="dialog-buttons">
+    <button mat-button color="primary" class="action-button" (click)="onConfirm()" [disabled]="!aiQueryForm.valid">Potvrdit</button>
+    <button mat-button color="warn" class="action-button" (click)="onCancel()">Zrušit</button>
+  </div>
+</mat-dialog-actions>

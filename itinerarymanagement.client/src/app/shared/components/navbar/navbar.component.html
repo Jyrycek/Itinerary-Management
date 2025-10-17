@@ -1,0 +1,61 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span routerLink="/"><img src="assets/logo.png" alt="Logo" class="logo"></span>
+
+        <button fxShow="false" fxShow.lt-sm mat-icon-button (click)="toggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span fxShow="false" fxShow.gt-xs>
+            <button class="nav-custom-button" mat-button routerLink="/">
+                <span>{{ 'NAV.HOME' | translate }}</span>
+            </button>
+            @if (isLoggedIn) {
+            <button class="nav-custom-button" mat-button routerLink="/dashboard">
+                <span>{{ 'NAV.PROJECTS' | translate }}</span>
+            </button>
+            }
+        </span>
+
+        <span class="spacer"></span>
+
+        @if (isLoggedIn) {
+        <button mat-icon-button [matMenuTriggerFor]="userMenu">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #userMenu="matMenu" class="user-menu">
+            <div class="menu-username">
+                <mat-icon>person</mat-icon>
+                {{ userName }}
+            </div>
+            <mat-divider></mat-divider>
+            <button mat-menu-item routerLink="/profile">
+                <mat-icon>edit</mat-icon>
+                <span>{{ 'NAV.EDIT_PROFILE' | translate }}</span>
+            </button>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>{{ 'NAV.LOGOUT' | translate }}</span>
+            </button>
+        </mat-menu>
+        } @else {
+        <button mat-flat-button class="login-button" mat-button routerLink="/login">
+            <mat-icon>login</mat-icon>
+            <span>{{ 'NAV.LOGIN' | translate }}</span>
+        </button>
+        }
+    </mat-toolbar-row>
+</mat-toolbar>
+
+@if (sidenavOpen) {
+<div class="dropdown-menu">
+    <button mat-button routerLink="/" (click)="closeSidenav()">{{ 'NAV.HOME' | translate }}</button>
+    @if (isLoggedIn) {
+    <button mat-button routerLink="/dashboard" (click)="closeSidenav()">{{ 'NAV.PROJECTS' | translate }}</button>
+    }
+</div>
+}
+
+<div>
+    <router-outlet></router-outlet>
+</div>

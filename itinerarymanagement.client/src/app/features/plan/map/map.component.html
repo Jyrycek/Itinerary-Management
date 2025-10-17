@@ -1,0 +1,60 @@
+<div class="button-wrapper">
+  <span [matTooltip]="isButtonDisabled || isLoadingAiPlaces ? 'Přibližte mapu pro odemknutí tlačítka' : 'Vyhledávací menu'" matTooltipPosition="below">
+    <button [disabled]="isButtonDisabled || isLoadingAiPlaces"
+      [ngClass]="{ 'disabled-button': isButtonDisabled }"
+      mat-icon-button class="map-button-top-icon custom-map-button"
+      [matMenuTriggerFor]="placeMenu"
+      matTooltip="Vyhledávací menu"
+      matTooltipPosition="below">
+      <mat-icon class="icon-top-center">tune</mat-icon>
+    </button>
+  </span>
+  <span [matTooltip]="isButtonDisabled || isLoadingAiPlaces ? 'Přibližte mapu pro odemknutí tlačítka' : 'Vyhledání míst v oblasti'" matTooltipPosition="below">
+    <button mat-raised-button
+      class="map-button-top-center custom-button"
+      [disabled]="isButtonDisabled || isLoadingAiPlaces"
+      [ngClass]="{ 'disabled-button': isButtonDisabled }"
+      (click)="useOverpassApi()">
+      {{ isSearching ? 'Zrušit vyhledávání' : 'Vyhledat místa' }}
+    </button>
+  </span>
+  <button mat-icon-button class="custom-map-button map-button-top-icon map-button-icon-text"
+    [disabled]="loading || isLoadingAiPlaces"
+    matTooltip="Najít turistická místa pomocí AI"
+    (click)="findPlacesAI()"
+    matTooltipPosition="below">
+    <mat-icon class="icon-top-center">smart_toy</mat-icon>
+
+    <span class="button-text">AI</span>
+  </button>
+
+  @if (loading || isLoadingWikipedia || isLoadingPlaceMarker || isLoadingAiPlaces) {
+    <mat-spinner mode="indeterminate"
+    class="progress-bar"></mat-spinner>
+  }
+  <mat-menu #placeMenu="matMenu" class="custom-menu-panel">
+    <button mat-menu-item>
+      <mat-checkbox [(ngModel)]="selectAll" (change)="toggleSelectAll($event)">Vybrat vše</mat-checkbox>
+    </button>
+    @for (category of placeCategories; track category) {
+      <button mat-menu-item>
+        <mat-checkbox [(ngModel)]="selectedPlaceCategories[category.key]"
+          (change)="updateSelectAll()"
+          (click)="keepMenuOpen($event)">
+          {{ category.label }}
+        </mat-checkbox>
+      </button>
+    }
+  </mat-menu>
+</div>
+
+<div id="map" class="map"></div>
+<div class="map-styl-changer">
+  <select id="mapStyleSelect" (change)="this.mapService.changeMapStyle($event, 'default')" class="map-style-select">
+    @for (style of this.mapService.mapStyles; track style) {
+      <option [value]="style.style">{{ style.label }}</option>
+    }
+  </select>
+</div>
+
+<ng-container #contextMenuHost></ng-container>

@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>
+    Upravit místo
+    <button tabindex="-1" mat-icon-button mat-dialog-close aria-label="Close" class="close-button" (click)="onCancel()">
+        <mat-icon>close</mat-icon>
+    </button>
+</h2>
+
+<mat-dialog-content>
+  <div class="text-info">Již upravujete jiné místo. Chcete změny uložit nebo zrušit?</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="dialog-buttons">
+        <button tabindex="-1" mat-button color="primary" class="action-button" (click)="onSave()">
+            Uložit
+        </button>
+        <button tabindex="-1" mat-button color="warn" class="action-button" (click)="onDiscard()">
+            Zrušit
+        </button>
+    </div>
+</mat-dialog-actions>

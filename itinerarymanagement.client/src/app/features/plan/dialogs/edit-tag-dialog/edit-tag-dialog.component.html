@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>
+  Upravit štítek
+  <button tabindex="-1" mat-icon-button mat-dialog-close aria-label="Close" class="close-button">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
+<div mat-dialog-content>
+  <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Název štítku</mat-label>
+      <input matInput formControlName="name" required autocomplete="off">
+      @if (name?.invalid && (name?.dirty || name?.touched)) {
+        <mat-error>
+          <span>Název štítku je povinný</span>
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <div class="color-picker-container">
+      <mat-form-field appearance="outline" class="color-input-field full-width">
+        <mat-label>Barva štítku</mat-label>
+        <div class="color-input-wrapper">
+          <input matInput type="text" formControlName="colorHex" [value]="colorHex" (input)="onColorHexChange($event)" class="color-input" required autocomplete="off">
+        </div>
+        @if (colorHexControl?.invalid && (colorHexControl?.dirty || colorHexControl?.touched)) {
+          <mat-error>
+            <span>Zvolená barva není platná</span>
+          </mat-error>
+        }
+      </mat-form-field>
+      <input class="color-picker" type="color" [value]="colorHex" (input)="onColorPickerChange($event)" aria-label="Barva štítku">
+    </div>
+
+    @if (error) {
+      <div class="error-message">{{ error }}</div>
+    }
+
+    <div class="dialog-buttons">
+        <button tabIndex="-1" mat-button color="primary" class="action-button" type="submit" [disabled]="editForm.invalid">
+            Uložit
+        </button>
+        <button tabIndex="-1" mat-button color="warn" class="action-button" mat-dialog-close>
+            Zrušit
+        </button>
+    </div>
+  </form>
+</div>

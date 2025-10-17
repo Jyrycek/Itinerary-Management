@@ -1,0 +1,34 @@
+<div class="home-container">
+    <div class="features-section">
+        <h2>{{ 'FEATURES.TITLE' | translate }}</h2>
+        <div class="features-grid">
+            <div class="feature-box">
+                <mat-icon class="feature-icon">event</mat-icon>
+                <h3>{{ 'FEATURES.SIMPLE_PLANNING.TITLE' | translate }}</h3>
+                <p>{{ 'FEATURES.SIMPLE_PLANNING.DESC' | translate }}</p>
+            </div>
+            <div class="feature-box">
+                <mat-icon class="feature-icon">map</mat-icon>
+                <h3>{{ 'FEATURES.INTERACTIVE_MAPS.TITLE' | translate }}</h3>
+                <p>{{ 'FEATURES.INTERACTIVE_MAPS.DESC' | translate }}</p>
+            </div>
+            <div class="feature-box">
+                <mat-icon class="feature-icon">notifications</mat-icon>
+                <h3>{{ 'FEATURES.NOTIFICATIONS.TITLE' | translate }}</h3>
+                <p>{{ 'FEATURES.NOTIFICATIONS.DESC' | translate }}</p>
+            </div>
+            <div class="feature-box">
+                <mat-icon class="feature-icon">smart_toy</mat-icon>
+                <h3>{{ 'FEATURES.AI_SEARCH.TITLE' | translate }}</h3>
+                <p>{{ 'FEATURES.AI_SEARCH.DESC' | translate }}</p>
+            </div>
+        </div>
+        <div class="cta-container">
+            <a class="cta-button" mat-flat-button color="primary" routerLink="/dashboard">{{ 'FEATURES.CTA' | translate }}</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p [innerHTML]="'FOOTER' | translate"></p>
+    </footer>
+</div>

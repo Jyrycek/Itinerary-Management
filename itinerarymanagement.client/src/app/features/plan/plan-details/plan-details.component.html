@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="sidenav-container" #sidenavContainer>
+    <mat-nav-list class="sidenav" [style.width]="sidenavWidth">
+
+      @for (item of menuItems; track item) {
+        <div>
+
+          <mat-list-item class="no-select sidenav-button"
+            (click)="handleItemClick(item.id)">
+
+            <span class="item-title">{{ item.title }}</span>
+          </mat-list-item>
+          @if (item.id === 'places'){
+            @if (item.sidenavExpanded) {
+              <div>
+                <mat-nav-list dense>
+                  @for (place of places; track place) {
+                    @if(place.title)
+                      {
+                    <mat-list-item class="no-select sub-sidenav-button"
+                                   [ngClass]="{'active': activePlaceId === place.id.toString()}"
+                                   (click)="scrollToPlace(place)"
+                                   [matTooltip]="place.title"
+                                   matTooltipPosition="right">
+                        <span class="sub-sidenav-text">{{ place.title }} </span>
+                      </mat-list-item>
+                    }
+                  }
+                </mat-nav-list>
+              </div>
+            }
+          }
+          @if (item.id === 'itinerary'){
+            @if (item.sidenavExpanded) {
+              <div>
+                  <mat-nav-list dense>
+                      @for (day of itineraryDays; track day.id) {
+                      <mat-list-item class="no-select sub-sidenav-button"
+                                     [ngClass]="{'active': activeItineraryDayId === day.id.toString()}"
+                                     (click)="scrollToDay(day)">
+                          <span class="sub-sidenav-text">{{ day.formattedDate }}</span>
+                      </mat-list-item>
+                      }
+                  </mat-nav-list>
+              </div>
+            }
+          }
+        </div>
+      }
+    </mat-nav-list>
+
+    <div class="content" id="scroll-container" #scrollContainer>
+        <div class="places-section">
+            <div class="section-divider" id="places" #sectionElement>
+                <div class="title-wrapper">
+                    <span class="item-title-in" id="places">Místa</span>
+                </div>
+            </div>
+            <div>
+                <app-place-list></app-place-list>
+            </div>
+        </div>
+        <div class="itinerary-section">
+            <div class="section-divider" id="itinerary" #sectionElement>
+                <div class="title-wrapper">
+                    <span class="item-title-in" id="itinerary">Itinerář</span>
+                    <button mat-icon-button (click)="openDialogAcoSort()" class="open-dialog-btn" matTooltip="Automatické rozdělení míst mezi dny">
+                        <mat-icon>auto_fix_high</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div>
+                <app-itinerary-day-list></app-itinerary-day-list>
+            </div>
+        </div>
+    </div>
+  </div>
+  <button mat-icon-button class="toggle-sidenav-button"
+    [style.left]="isSidenavHidden ? '0' : '110px'"
+    matTooltipPosition="right"
+    [matTooltip]="isSidenavHidden ? 'Zobrazit menu' : 'Zakrýt menu'"
+    (click)="toggleSidenav()">
+    <mat-icon>{{ isSidenavHidden ? 'keyboard_arrow_right' : 'keyboard_arrow_left' }}</mat-icon>
+  </button>
+  <div class="resizer" (mousedown)="onMouseDown($event)"></div>
+  <button mat-icon-button class="toggle-map-button" (click)="toggleMap()">
+    <mat-icon>{{ isMapVisible ? 'close' : 'arrow_forward' }}</mat-icon>
+  </button>
+  <div class="right-panel">
+    <div class="map-container" [ngClass]="{ 'map-hidden': !isMapVisible }">
+      <app-map></app-map>
+    </div>
+  </div>
+</div>

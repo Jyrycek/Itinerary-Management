@@ -1,0 +1,43 @@
+<div style="max-width: 200px; text-align: center;">
+  <h6>{{ title }}</h6>
+
+  @if (images && images.length > 0) {
+    <div class="image-container">
+      @if (images.length > 1) {
+        <button (click)="prevImage()" class="image-nav-button left">
+          <mat-icon class="small-icon">chevron_left</mat-icon>
+        </button>
+      }
+      @if (isLoading) {
+        <div class="loading-spinner">
+          <mat-spinner strokeWidth="4"></mat-spinner>
+        </div>
+      }
+      @if (images){
+        @if (imageSrc) {
+          <img
+            [src]="imageSrc"
+            class="image-display"
+            alt="Obrázek místa"
+            [class.hidden]="isLoading"
+            (load)="onImageLoaded()"
+            (error)="onImageError()" />
+        }
+      }
+      <div class="image-counter">
+        {{ currentImageIndex + 1 }} / {{ images.length }}
+      </div>
+      @if (images.length > 1) {
+        <button (click)="nextImage()" class="image-nav-button right">
+          <mat-icon class="small-icon">chevron_right</mat-icon>
+        </button>
+      }
+    </div>
+  }
+
+  <p>{{ summary }}</p>
+  @if (!areCordCertain) {
+    <p class="note-coordinates">Umístění nemusí být přesné</p>
+  }
+  <button mat-flat-button color="primary" class="custom-button" (click)="addPlaceToMap()">Přidat místo</button>
+</div>

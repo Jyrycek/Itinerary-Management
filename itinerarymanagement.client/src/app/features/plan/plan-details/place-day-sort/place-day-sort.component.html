@@ -1,0 +1,135 @@
+@if (isLoadingPlaceSort){
+  <div class="loading-overlay" [ngClass]="{ 'loading-overlay': !isMapVisible, 'full-screen': isMapVisible }">
+    <mat-progress-spinner diameter="50" mode="indeterminate" color="primary"></mat-progress-spinner>
+  </div>
+}
+<div #itineraryMapDialog class="full-screen-dialog">
+  <div class="dialog-header" tabindex="0">
+    <button mat-icon-button (click)="closeDialog()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="dialog-content">
+    <div class="left-section">
+      <div class="left-in">
+        @for (day of optimizedItineraryDays; track trackByIndex($index)) {
+          <div>
+            <mat-card class="day-card" [ngStyle]="{'background-color': 'white', 'margin': '15px 0'}">
+              <button class="custom-button add-place-button"
+                mat-flat-button
+                color="primary"
+                (click)="onItineraryDaySelectionChange(day)"
+                [disabled]="isPlacesAdded[day.id] || isLoadingPlaceSort">
+                {{ isPlacesAdded[day.id] ? 'Uloženo' : 'Uložit do itineráře' }}
+              </button>
+              <mat-card-header class="title-header">
+                <mat-card-title class="itinerary-day-header">
+                  <div class="add-place-itinerary-cursor">
+                    <div class="color-indicator" [ngStyle]="{'background-color': dayColors[day.id] || '#ccc'}"></div>
+                    {{ day.formattedFullDate }}
+                  </div>
+                  @if(day.startTime && day.endTime) {
+                    <span class="datetime-title">{{ day.startTime | timeFormat }} - {{ day.endTime | timeFormat }}</span>
+                  }
+
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content class="itinerary-day-content">
+                @if (day.places && day.places.length > 0) {
+                  @for (place of day.places; track trackByIndex(i); let i = $index) {
+                    <div>
+                      <div class="place-small-container" (mouseenter)="highlightMarkers(place.id, day.id)" (mouseleave)="highlightMarkers(null, -1)">
+                        <mat-card class="place-small-card">
+                          <mat-card-content class="place-small-card-content">
+                            <div class="arrival-time">
+                              <mat-icon>watch_later</mat-icon>
+                              <span>{{ calculateArrivalTime(day, i) }}</span>
+                            </div>
+                            @if (place.placeImages.length > 0) {
+                              <img [src]="apiUrl + place.placeImages[0].id + '?width=0&height=0&maxWidth=80&maxHeight=80'" alt="Obrázek místa" class="place-image-small" (click)="openPlaceDetailDialog(place)">
+                            }
+                            <div class="time-required" [ngStyle]="{ 'z-index': i === 0 ? 10 : 2 }">
+                              <mat-icon>schedule</mat-icon>
+                              <span>{{ place.visitDuration }} minut</span>
+                            </div>
+                            <div class="place-info-small">
+                              <div class="place-title-small" (click)="openPlaceDetailDialog(place)">
+                                {{ place.title }}
+                              </div>
+                              <div class="coordinates-small">
+                                {{ decimalToDMS(place.latitude, true) }}, {{ decimalToDMS(place.longitude, false) }}
+                              </div>
+                              <div class="place-description-small">
+                                {{ place.description }}
+                              </div>
+                              @if(place.openingHours){
+                                @if (place.openingHours) {
+                                  <div class="opening-hours-small">
+                                    <mat-icon class="small-icon centered-icon">schedule</mat-icon>
+                                    <span>{{ place.openingHours }}</span>
+                                  </div>
+                                }
+                              }
+                              @if(place.website) {
+                                @if (place.website) {
+                                  <div class="website-small">
+                                    <mat-icon class="small-icon centered-icon">public</mat-icon>
+                                    <a [href]="place.website" target="_blank" rel="noopener noreferrer">{{ place.website }}</a>
+                                  </div>
+                                }
+                              }
+                              @if(place.tags && place.tags.length > 0){
+                                <div class="tags-container-itinerary">
+                                  @for (tag of place.tags; track tag) {
+                                    <span class="tag-itinerary">{{ tag.name }}</span>
+                                  }
+                                </div>
+                              }
+                            </div>
+                            <mat-card-actions class="place-day-actions">
+                              <button mat-icon-button matTooltip="Zobrazit na mapě" matTooltipPosition="above" (click)="markPlaceOnMap([place.longitude, place.latitude])" class="right-buttons">
+                                <mat-icon class="place-day-icon">place</mat-icon>
+                              </button>
+                            </mat-card-actions>
+                          </mat-card-content>
+                        </mat-card>
+                      </div>
+                      @if (i < day.places.length - 1 && day.places.length > 0) {
+                        <div class="place-connector-vertical">
+                          <div class="distance-line-vertical-up"></div>
+                          <div class="distance-info-vertical">
+                            {{ calculateDistances(day.places[i].latitude, day.places[i].longitude, day.places[i+1].latitude, day.places[i+1].longitude) | number:'1.1-2' }} km
+                            | 8 km/h | {{ calculateTravelTime(day.places[i].latitude, day.places[i].longitude, day.places[i+1].latitude, day.places[i+1].longitude) }}
+                          </div>
+                          <div class="distance-line-vertical-down"></div>
+                        </div>
+                      }
+                    </div>
+                  }
+                }
+              </mat-card-content>
+              <div class="map-container" [ngClass]="{ 'map-hidden': !isMapVisible }">
+                <div id="dialogMap-{{ day.id }}" class="dialogMap"></div>
+              </div>
+            </mat-card>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="map-container" [ngClass]="{ 'map-hidden': !isMapVisible }">
+        <div class="map-styl-changer">
+          <select id="mapStyleSelect" (change)="this.mapService.changeMapStyle($event, 'sort')" class="map-style-select">
+            @for (style of this.mapService.mapStyles; track style) {
+              <option [value]="style.style">{{ style.label }}</option>
+            }
+          </select>
+        </div>
+        <div id="dialogSortMap" class="dialogSortMap"></div>
+      </div>
+    </div>
+    <button mat-icon-button class="toggle-map-button" (click)="toggleMap()">
+      <mat-icon>{{ isMapVisible ? 'close' : 'arrow_forward' }}</mat-icon>
+    </button>
+  </div>
+</div>

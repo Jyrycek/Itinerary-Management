@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>
+  Nastavení hledání trasy
+  <button tabindex="-1" mat-icon-button mat-dialog-close aria-label="Close" class="close-button">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
+<mat-dialog-content>
+  <form [formGroup]="routeForm">
+    <mat-form-field>
+      <mat-label>Začátek</mat-label>
+      <mat-select formControlName="startLocation">
+        @for (place of places; track place) {
+          <mat-option [value]="place.order">{{ place.title }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Cíl</mat-label>
+      <mat-select formControlName="endLocation">
+        @for (place of places; track place) {
+          <mat-option [value]="place.order">{{ place.title }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="dialog-buttons">
+    <button tabIndex="-1" mat-button color="primary" class="action-button" [mat-dialog-close]="routeForm.value" [disabled]="!routeForm.valid">
+      Potvrdit
+    </button>
+    <button tabIndex="-1" (click)="onNoClick()" mat-button color="warn" class="action-button" mat-dialog-close>
+      Zrušit
+    </button>
+  </div>
+</mat-dialog-actions>

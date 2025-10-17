@@ -1,0 +1,875 @@
+.container {
+  display: flex;
+  height: calc(100vh - 64px);
+  max-width: 100%;
+  overflow: auto
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  position: relative;
+  display: flex
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  z-index: 10
+}
+
+.button-place {
+  margin-bottom: 20px
+}
+
+mat-card-title {
+  font-size: 22px;
+  font-weight: bolder;
+  color: #333;
+  margin: 0;
+  padding-bottom: 5px;
+  position: relative;
+  text-align: center
+}
+
+mat-card-content p {
+  color: #555;
+  line-height: 1.5;
+  text-align: left;
+  margin-top: -22px
+}
+
+.coordinates {
+  font-size: .85rem;
+  color: #666;
+  position: relative;
+  top: -6px
+}
+
+mat-card-header {
+  flex-direction: column
+}
+
+.delete-icon {
+  color: #888;
+  margin-left: auto
+}
+
+.place-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 0;
+  margin-top: 0 !important
+}
+
+.item-title {
+  font-size: 1.1em;
+  font-family: Arial,sans-serif;
+  font-weight: bolder
+}
+
+.action-buttons {
+  margin-left: auto;
+  display: flex;
+  align-items: center
+}
+
+.sort-button {
+  margin-right: 10px
+}
+
+.add-day-button {
+  margin-left: 6px
+}
+
+.itinerary-container {
+  font-family: Roboto,sans-serif;
+  color: #333
+}
+
+.place-card {
+  margin-bottom: 10px
+}
+
+.mat-card-actions {
+  justify-content: space-between
+}
+
+.mat-menu-content {
+  display: flex;
+  flex-direction: column
+}
+
+.item-title {
+  font-size: 1.3em;
+  color: #333
+}
+
+.mat-card-actions button {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px 20px 10px 20px;
+  transition: background-color .3s ease
+}
+
+  .mat-card-actions button:hover {
+    background-color: #0056b3
+  }
+
+.itinerary-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  position: relative;
+  z-index: 10;
+}
+
+  .itinerary-day-header .day-title {
+    font-size: 1.3em;
+    color: #333;
+    font-weight: 700;
+    margin-right: 10px
+  }
+
+  .itinerary-day-header .icon {
+    font-size: 24px;
+    color: #007bff
+  }
+
+.itinerary-day-content {
+  padding: 0 16px 16px 16px;
+  margin-top: -10px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  align-items: center;
+  width: 100%
+}
+
+.place-card {
+  width: 100%
+}
+
+.place-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-top: 10px
+}
+
+.title-header {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10
+}
+
+.place-small-card {
+  border: none;
+  box-shadow: none;
+  background-color: #f9f9f9
+}
+
+.place-small-card-content {
+  display: block;
+  padding: 8px;
+  padding-bottom: 0 !important;
+  padding-top: 8px;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+  box-sizing: border-box
+}
+
+.place-image-small {
+  float: left;
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 4px;
+  display: block;
+  margin-right: 12px;
+  margin-top: -2px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.place-image-small-dialog {
+  float: left;
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 4px;
+  display: block;
+  margin-right: 12px;
+  margin-top: -2px
+}
+
+.place-info-small {
+  padding-right: 5px;
+  padding-left: 4px;
+  position: relative;
+  margin-bottom: -7px;
+}
+
+.coordinates-small {
+  font-size: .7em;
+  color: #888;
+  text-align: center;
+  margin-top: -8px
+}
+
+.place-title-small {
+  font-size: .85em;
+  font-weight: 700;
+  text-align: center;
+  margin-top: -8px;
+  hyphens: auto;
+  word-wrap: break-word;
+  cursor: pointer;
+}
+
+.place-description-small {
+  font-size: .75em;
+  color: #666;
+  text-align: left;
+  line-height: 1.2em;
+  margin-top: 0;
+  padding-right: 8px;
+  hyphens: auto;
+  word-wrap: break-word;
+}
+
+.place-day-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  margin-top: -12px;
+  margin-bottom: -5px !important;
+}
+
+.place-day-icon {
+  font-size: 20px;
+}
+
+@media (max-width:768px) {
+  .map-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform .3s ease;
+    transform: translateX(100%)
+  }
+
+    .map-container:not(.map-hidden) {
+      transform: translateX(0)
+    }
+
+  .map {
+    height: 100%;
+    margin-top: 62px;
+    width: 100%;
+    position: relative
+  }
+
+  .container {
+    flex-direction: column
+  }
+}
+
+.tag {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 4px;
+  display: inline-block
+}
+
+.tags-container {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center
+}
+
+.tags-container-itinerary {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center
+}
+
+.tag-itinerary {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 3px;
+  font-size: 12px;
+  display: inline-block
+}
+
+.itinerary-day-container {
+  margin-top: 30px;
+  margin-bottom: 40px
+}
+
+.full-screen-dialog {
+  width: 100vw;
+  min-width: 100vw !important;
+  height: 100%;
+  margin: 0;
+  position: fixed;
+  z-index: 1004;
+  padding: 0;
+}
+
+.back-button {
+  border: none;
+  background: 0 0;
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+}
+
+.dialog-content {
+  display: flex;
+  height: calc(100vh - 46px)
+}
+
+.left-section {
+  width: 50%;
+  padding-left: 0;
+  overflow-y: auto;
+  background-color: #f3f4f5;
+}
+
+.left-in {
+  margin: 8px
+}
+
+.right-section {
+  width: 50%;
+  position: relative
+}
+
+.dialog-header-date {
+  margin-left: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.dialogSortMap {
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex
+}
+
+.custom-tag-color {
+  color: var(--mat-chip-label-text-color) !important
+}
+
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+  height: 24px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+  .dialog-header:focus {
+    outline: 0
+  }
+
+  .dialog-header .action-buttons {
+    margin-left: auto;
+    display: flex;
+    align-items: center
+  }
+
+@media (max-width:768px) {
+  .dialog-header {
+    flex-direction: column;
+    align-items: flex-start
+  }
+
+  .action-buttons {
+    margin-left: 0;
+    margin-top: 10px
+  }
+}
+
+.dialog-button-sort {
+  display: flex;
+  justify-content: space-between;
+  z-index: 1002
+}
+
+.content-place-form {
+  margin-bottom: 0 !important
+}
+
+.coordinate-container {
+  text-align: center
+}
+
+.full-width {
+  width: 100%
+}
+
+.edit-width {
+  width: calc(100% - 140px)
+}
+
+.coordinate-input {
+  flex: 1;
+  min-width: 100px;
+  margin-right: 10px
+}
+
+.coordinate-inputs {
+  margin-top: 10px;
+  display: flex;
+  align-items: flex-start;
+  width: calc(100% - 140px)
+}
+
+.coordinate-inputs-add {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start
+}
+
+.chip-list {
+  width: 100%
+}
+
+.centered-actions {
+  display: flex;
+  justify-content: right;
+  gap: 8px
+}
+
+.spacer {
+  width: 32px
+}
+
+.buttons-center {
+  display: flex;
+  justify-content: center;
+  width: 100%
+}
+
+mat-card {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 2px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15)
+}
+
+mat-form-field textarea {
+  max-height: 200px
+}
+
+form {
+  margin-bottom: 20px
+}
+
+.action-button {
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color .2s ease,transform .1s ease;
+  box-shadow: none;
+  margin: 0 4px
+}
+
+  .action-button:hover {
+    transform: translateY(-1px)
+  }
+
+  .action-button:active {
+    transform: translateY(0)
+  }
+
+.icon-marking {
+  margin-top: 8px
+}
+
+mat-form-field {
+  width: 100%
+}
+
+::ng-deep .mat-mdc-dialog-container {
+  min-width: 100vw;
+}
+
+:host ::ng-deep .mat-mdc-dialog-surface {
+  border-radius: 0 !important;
+}
+
+::ng-deep .mdc-evolution-chip__text-label {
+  color: var(--your-tag-color) !important;
+}
+
+::ng-deep .mdc-list-item__primary-text {
+  color: var(--your-tag-color) !important;
+}
+
+.spinner-icon {
+  margin-bottom: 20px;
+  margin-left: 19px;
+  margin-right: 8px;
+  padding: 0;
+}
+
+.icon-button {
+  margin-left: 10px;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.textarea-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.loading-overlay mat-progress-spinner {
+  pointer-events: none;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  width: 50%;
+  height: calc(100% - 45px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 1005;
+}
+
+
+.toggle-map-button {
+  position: fixed;
+  top: 50%;
+  right: 10px;
+  z-index: 1001;
+  display: none;
+  transition: top .3s ease
+}
+
+@media (max-width:768px) {
+  .toggle-map-button {
+    display: block
+  }
+
+    .toggle-map-button.map-open {
+      top: unset;
+      bottom: 10px;
+      right: 50%;
+      transform: translateX(50%);
+    }
+
+  .map-container {
+    position: fixed;
+    top: 45px;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform .3s ease;
+    transform: translateX(100%)
+  }
+
+    .map-container.map-hidden {
+      transform: translateX(100%)
+    }
+
+    .map-container:not(.map-hidden) {
+      transform: translateX(0)
+    }
+
+  .dialogSortMap {
+    height: 100%;
+    width: 100%;
+    position: relative
+  }
+
+  .left-section {
+    flex-direction: column;
+    display: block;
+    width: 100%;
+  }
+
+  .right-section {
+    width: 0;
+  }
+
+  .right-panel {
+    width: 100%;
+    height: 300px;
+    margin-top: 20px
+  }
+
+  .toggle-sidenav-button {
+    display: none
+  }
+
+  .loading-overlay {
+    width: 100%;
+    height: 100%;
+    top: 45px;
+    left: 0;
+  }
+}
+
+.progress-bar {
+  max-width: 24px;
+  max-height: 24px;
+  margin-right: 8px
+}
+
+.time-required {
+  position: absolute;
+  top: -24px;
+  left: calc(50% + 40px);
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  color: white;
+  background-color: #005CBB;
+  padding: 1px 5px;
+  white-space: nowrap;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  font-family: Roboto, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  .time-required mat-icon {
+    font-size: 18px;
+    color: white;
+    margin-top: 2px;
+  }
+
+.title-input {
+  flex: 0.70;
+}
+
+.time-input {
+  flex: 0.3;
+  min-width: 80px;
+  margin-right: 10px;
+}
+
+.title-width {
+  flex: 0.7;
+}
+
+.place-connector-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -12px;
+  margin-bottom: -12px;
+  position: relative
+}
+.distance-line-vertical-up {
+  width: 1px;
+  height: 20px;
+  background-color: #dcdcdc;
+  position: relative;
+  z-index: 0;
+  margin-top: -6px;
+}
+.distance-line-vertical-down {
+  width: 1px;
+  height: 30px;
+  background-color: #dcdcdc;
+  position: relative;
+  z-index: 0;
+  margin-bottom: -6px;
+}
+
+.distance-info-vertical {
+  font-size: 0.6em;
+  color: #333;
+  background-color: #fff;
+  padding: 0px 6px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-70%);
+  z-index: 1;
+  white-space: nowrap;
+  text-align: center
+}
+.right-buttons {
+    margin-right: -10px;
+}
+
+.custom-button {
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-place-button {
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  height: 32px;
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+  .add-place-button:disabled {
+    opacity: 1;
+    background-color: #cccccc; 
+    color: #666666;
+  }
+
+.arrival-time {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-top: -3px;
+}
+
+  .arrival-time mat-icon {
+    transform: scale(0.8);
+    margin-bottom: 1px;
+  }
+
+
+.color-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.add-place-itinerary-cursor {
+  display: flex;
+  align-items: center;
+}
+
+.map-styl-changer {
+  position: absolute;
+  z-index: 100;
+  top: 10px;
+  left: 15px;
+}
+
+.map-style-select {
+  border: none;
+  outline: none;
+  font-size: 12px;
+  padding-top: 6px;
+  padding-right: 2px;
+  padding-bottom: 6px;
+  padding-left: 6px;
+  height: 30px;
+  width: 90px;
+  color: black;
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border-right: 6px solid transparent;
+}
+
+  .map-style-select:focus {
+    outline: none;
+    border: none;
+    border-right: 6px solid transparent;
+  }
+
+  .map-style-select option {
+    font-size: 12px;
+    border: none;
+  }
+
+.opening-hours-small,
+.website-small {
+  display: flex;
+  align-items: center;
+  font-size: 0.7em;
+  color: #555;
+}
+
+  .opening-hours-small mat-icon,
+  .website-small mat-icon {
+    font-size: 16px;
+    margin-right: 6px;
+    color: #005CBB;
+  }
+
+  .website-small a {
+    color: #005CBB;
+    text-decoration: none;
+  }
+
+    .website-small a:hover {
+      text-decoration: underline;
+    }
+
+.centered-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.opening-hours-small {
+  margin-bottom: 0;
+}
+
+.website-small {
+  margin-top: 0;
+}

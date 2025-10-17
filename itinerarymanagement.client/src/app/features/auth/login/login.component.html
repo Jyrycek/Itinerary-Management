@@ -1,0 +1,59 @@
+<mat-card class="login-container">
+    <mat-card-header class="centered-title">
+        <mat-card-title>{{ 'LOGIN.TITLE' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>{{ 'LOGIN.USERNAME_LABEL' | translate }}</mat-label>
+                <mat-icon matPrefix>person</mat-icon>
+                <input matInput type="text" formControlName="username" required />
+                @if (username?.invalid && (username?.dirty || username?.touched)) {
+                <mat-error>
+                    @if (username?.errors?.['required']) {
+                    <span>{{ 'LOGIN.USERNAME_REQUIRED' | translate }}</span>
+                    }
+                </mat-error>
+                }
+            </mat-form-field>
+
+            <br />
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>{{ 'LOGIN.PASSWORD_LABEL' | translate }}</mat-label>
+                <mat-icon matPrefix>lock</mat-icon>
+                <input matInput type="password" formControlName="password" required />
+                @if (password?.invalid && (password?.dirty || password?.touched)) {
+                <mat-error>
+                    @if (password?.errors?.['required']) {
+                    <span>{{ 'LOGIN.PASSWORD_REQUIRED' | translate }}</span>
+                    }
+                </mat-error>
+                }
+            </mat-form-field>
+
+            @if (error) {
+            <div class="error-message">
+                {{ error }}
+            </div>
+            }
+
+            <button mat-flat-button class="custom-button" color="primary" type="submit" [disabled]="loginForm.invalid">
+                {{ 'LOGIN.BUTTON_SUBMIT' | translate }}
+            </button>
+
+            <div style="margin-top: 14px" class="register-link">
+                {{ 'LOGIN.NO_ACCOUNT' | translate }}
+                <a routerLink="/register" href="/register">{{ 'LOGIN.REGISTER_LINK' | translate }}</a>
+            </div>
+
+            @if (error) {
+            <div class="forgot-password-link">
+                <a routerLink="/recovery-password" href="/recovery-password">{{ 'LOGIN.FORGOT_PASSWORD' | translate }}</a>
+            </div>
+            }
+
+        </form>
+    </mat-card-content>
+</mat-card>

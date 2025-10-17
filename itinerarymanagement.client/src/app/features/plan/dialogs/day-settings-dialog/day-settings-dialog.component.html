@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>
+  Nastavení času dne
+  <button tabindex="-1" mat-icon-button mat-dialog-close aria-label="Close" class="close-button">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="daySettingsForm">
+    <mat-form-field>
+      <mat-label>Začátek dne</mat-label>
+      <mat-select formControlName="startTime">
+        @for (hour of hours; track hour) {
+          <mat-option [value]="hour">{{ hour }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Konec dne</mat-label>
+      <mat-select formControlName="endTime">
+        @for (hour of hours; track hour) {
+          <mat-option [value]="hour">{{ hour }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="dialog-buttons">
+    <button tabIndex="-1" mat-button color="primary" class="action-button" [mat-dialog-close]="daySettingsForm.value" [disabled]="!daySettingsForm.valid">
+      Potvrdit
+    </button>
+    <button tabIndex="-1" (click)="onCancel()" mat-button color="warn" class="action-button" mat-dialog-close>
+      Zrušit
+    </button>
+  </div>
+</mat-dialog-actions>

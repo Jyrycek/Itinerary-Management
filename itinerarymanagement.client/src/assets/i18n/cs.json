@@ -1,0 +1,114 @@
+{
+  "FEATURES": {
+    "TITLE": "Naše klíčové funkce",
+    "SIMPLE_PLANNING": {
+      "TITLE": "Jednoduché plánování",
+      "DESC": "Vytvořte si itinerář na pár kliknutí. Přidejte destinace, aktivity a poznámky."
+    },
+    "INTERACTIVE_MAPS": {
+      "TITLE": "Interaktivní mapy",
+      "DESC": "Prozkoumejte své cíle pomocí interaktivních map a najděte nejlepší trasy."
+    },
+    "NOTIFICATIONS": {
+      "TITLE": "Upozornění a notifikace",
+      "DESC": "Buďte informováni o změnách ve svém plánu a přijímejte důležitá oznámení."
+    },
+    "AI_SEARCH": {
+      "TITLE": "Chytré vyhledávání s AI",
+      "DESC": "Využijte umělou inteligenci pro doporučení míst na základě vašich preferencí."
+    },
+    "CTA": "Začít plánovat"
+  },
+  "FOOTER": "&copy; Jiří Gengela 2025. Všechna práva vyhrazena.",
+  "NAV": {
+    "HOME": "Domů",
+    "PROJECTS": "Projekty",
+    "EDIT_PROFILE": "Upravit Profil",
+    "LOGOUT": "Odhlásit se",
+    "LOGIN": "Přihlášení"
+  },
+  "PROJECTS": {
+    "TITLE": "Seznam projektů",
+    "ADD_TOOLTIP": "Přidat projekt",
+    "HIDE": "Skrýt projekty",
+    "SHOW": "Zobrazit projekty",
+    "COUNT": "projekty",
+    "MORE_TOOLTIP": "Více",
+    "EDIT": "Upravit",
+    "DELETE": "Smazat",
+    "NONE_FOUND": "Žádné projekty nebyly nalezeny."
+  },
+  "PLAN": {
+    "TITLE_EDIT": "Upravit plán",
+    "TITLE_CREATE": "Plánování výletu",
+    "DESTINATION": "Kam?",
+    "DESTINATION_PLACEHOLDER": "Paříž, Praha, Japonsko",
+    "DESTINATION_REQUIRED": "Destinace je povinná.",
+    "DESTINATION_MAXLENGTH": "Destinace nesmí přesáhnout 100 znaků.",
+    "DATE_RANGE": "Datum od - do",
+    "START_DATE_REQUIRED": "Počáteční datum je povinné.",
+    "END_DATE_REQUIRED": "Koncové datum je povinné.",
+    "DATE_RANGE_INVALID": "Počáteční datum musí být před koncovým datem.",
+    "UPLOAD_TOOLTIP": "Nahrát obrázek",
+    "BUTTON_SAVE": "Uložit změny",
+    "BUTTON_START": "Začít plánovat"
+  },
+  "REGISTER": {
+    "TITLE": "Registrace",
+    "USERNAME_LABEL": "Uživatelské jméno",
+    "USERNAME_PLACEHOLDER": "Zadejte uživatelské jméno",
+    "USERNAME_REQUIRED": "Uživatelské jméno je povinné.",
+    "USERNAME_MINLENGTH": "Uživatelské jméno musí mít alespoň 3 znaky.",
+    "USERNAME_MAXLENGTH": "Uživatelské jméno nemůže mít víc jak 100 znaků.",
+    "PASSWORD_LABEL": "Heslo",
+    "PASSWORD_PLACEHOLDER": "Zadejte heslo",
+    "PASSWORD_REQUIRED": "Heslo je povinné.",
+    "PASSWORD_MINLENGTH": "Heslo musí mít alespoň 6 znaků.",
+    "FIRSTNAME_LABEL": "Jméno",
+    "FIRSTNAME_PLACEHOLDER": "Zadejte jméno",
+    "FIRSTNAME_REQUIRED": "Jméno je povinné.",
+    "LASTNAME_LABEL": "Příjmení",
+    "LASTNAME_PLACEHOLDER": "Zadejte příjmení",
+    "LASTNAME_REQUIRED": "Příjmení je povinné.",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_PLACEHOLDER": "Zadejte email",
+    "EMAIL_REQUIRED": "Email je povinný.",
+    "EMAIL_INVALID": "Neplatný formát emailu.",
+    "BUTTON_SUBMIT": "Registrovat se",
+    "HAVE_ACCOUNT": "Máte účet?",
+    "LOGIN_LINK": "Přihlašte se"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Obnovení hesla",
+    "NEW_PASSWORD_LABEL": "Nové heslo",
+    "NEW_PASSWORD_PLACEHOLDER": "Zadejte nové heslo",
+    "PASSWORD_REQUIRED": "Heslo je povinné.",
+    "PASSWORD_MINLENGTH": "Heslo musí mít alespoň 6 znaků.",
+    "CONFIRM_PASSWORD_LABEL": "Potvrďte heslo",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Zadejte potvrzení hesla",
+    "CONFIRM_PASSWORD_REQUIRED": "Potvrzení hesla je povinné.",
+    "PASSWORDS_MISMATCH": "Hesla se neshodují.",
+    "BUTTON_SUBMIT": "Obnovit heslo",
+    "BACK_TO_LOGIN": "Zpět na přihlášení"
+  },
+  "LOGIN": {
+    "TITLE": "Přihlášení",
+    "USERNAME_LABEL": "Uživatelské jméno",
+    "USERNAME_REQUIRED": "Uživatelské jméno je povinné.",
+    "PASSWORD_LABEL": "Heslo",
+    "PASSWORD_REQUIRED": "Heslo je povinné.",
+    "BUTTON_SUBMIT": "Přihlásit se",
+    "NO_ACCOUNT": "Nemáte účet?",
+    "REGISTER_LINK": "Zaregistrujte se",
+    "FORGOT_PASSWORD": "Zapomněli jste heslo?"
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "Obnovení hesla",
+    "INFO": "Pro obnovení svého hesla, zadejte prosím svůj email. Poté vám zašleme odkaz pro obnovení hesla.",
+    "EMAIL_LABEL": "E-mail",
+    "EMAIL_REQUIRED": "E-mail je povinný.",
+    "EMAIL_INVALID": "Zadejte platný e-mail.",
+    "SUBMIT_BUTTON": "Odeslat kód pro obnovení",
+    "BACK_TO_LOGIN": "Zpět na přihlášení"
+  }
+}

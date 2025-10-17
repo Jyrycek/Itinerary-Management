@@ -1,0 +1,31 @@
+.action-button {
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: none;
+  margin: 0 4px;
+}
+
+  .action-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .action-button:active {
+    transform: translateY(0);
+  }
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.dialog-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.text-info {
+    font-size: 15px;
+}

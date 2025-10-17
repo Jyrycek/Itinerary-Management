@@ -1,0 +1,134 @@
+<mat-card class="login-container">
+  <mat-card-header class="centered-title">
+    <mat-card-title>{{ 'REGISTER.TITLE' | translate }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+      <!-- Uživatelské jméno -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'REGISTER.USERNAME_LABEL' | translate }}</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input matInput
+          type="text"
+          formControlName="username"
+          required
+          [placeholder]="'REGISTER.USERNAME_PLACEHOLDER' | translate"
+          maxlength="100" />
+        @if (username?.invalid && (username?.dirty || username?.touched)) {
+          <mat-error>
+            @if (username?.errors?.['required']) {
+              <span>{{ 'REGISTER.USERNAME_REQUIRED' | translate }}</span>
+            }
+            @if (username?.errors?.['minlength']) {
+              <span>{{ 'REGISTER.USERNAME_MINLENGTH' | translate }}</span>
+            }
+            @if (username?.errors?.['maxlength']) {
+              <span>{{ 'REGISTER.USERNAME_MAXLENGTH' | translate }}</span>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+      <br>
+
+        <!-- Heslo -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'REGISTER.PASSWORD_LABEL' | translate }}</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput
+            type="password"
+            formControlName="password"
+            required
+            [placeholder]="'REGISTER.PASSWORD_PLACEHOLDER' | translate"
+            minlength="6" />
+          @if (password?.invalid && (password?.dirty || password?.touched)) {
+            <mat-error>
+              @if (password?.errors?.['required']) {
+                <span>{{ 'REGISTER.PASSWORD_REQUIRED' | translate }}</span>
+              }
+              @if (password?.errors?.['minlength']) {
+                <span>{{ 'REGISTER.PASSWORD_MINLENGTH' | translate }}</span>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+        <br>
+
+          <!-- Jméno -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'REGISTER.FIRSTNAME_LABEL' | translate }}</mat-label>
+            <mat-icon matPrefix>badge</mat-icon>
+            <input matInput
+              type="text"
+              formControlName="firstName"
+              required
+              [placeholder]="'REGISTER.FIRSTNAME_PLACEHOLDER' | translate" />
+            @if (firstName?.invalid && (firstName?.dirty || firstName?.touched)) {
+              <mat-error>
+                @if (firstName?.errors?.['required']) {
+                  <span>{{ 'REGISTER.FIRSTNAME_REQUIRED' | translate }}</span>
+                }
+              </mat-error>
+            }
+          </mat-form-field>
+          <br>
+
+            <!-- Příjmení -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>{{ 'REGISTER.LASTNAME_LABEL' | translate }}</mat-label>
+              <mat-icon matPrefix>badge</mat-icon>
+              <input matInput
+                type="text"
+                formControlName="lastName"
+                required
+                [placeholder]="'REGISTER.LASTNAME_PLACEHOLDER' | translate" />
+              @if (lastName?.invalid && (lastName?.dirty || lastName?.touched)) {
+                <mat-error>
+                  @if (lastName?.errors?.['required']) {
+                    <span>{{ 'REGISTER.LASTNAME_REQUIRED' | translate }}</span>
+                  }
+                </mat-error>
+              }
+            </mat-form-field>
+            <br>
+
+              <!-- Email -->
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>{{ 'REGISTER.EMAIL_LABEL' | translate }}</mat-label>
+                <mat-icon matPrefix>email</mat-icon>
+                <input matInput
+                  type="email"
+                  formControlName="email"
+                  required
+                  [placeholder]="'REGISTER.EMAIL_PLACEHOLDER' | translate" />
+                @if (email?.invalid && (email?.dirty || email?.touched)) {
+                  <mat-error>
+                    @if (email?.errors?.['required']) {
+                      <span>{{ 'REGISTER.EMAIL_REQUIRED' | translate }}</span>
+                    }
+                    @if (email?.errors?.['email']) {
+                      <span>{{ 'REGISTER.EMAIL_INVALID' | translate }}</span>
+                    }
+                  </mat-error>
+                }
+              </mat-form-field>
+
+              <!-- Globální chyba -->
+              @if (error) {
+                <div class="error-message">
+                  {{ error }}
+                </div>
+              }
+
+              <button mat-flat-button class="custom-button" color="primary" type="submit" [disabled]="registerForm.invalid">
+                {{ 'REGISTER.BUTTON_SUBMIT' | translate }}
+              </button>
+
+              <div style="margin-top: 10px" class="login-link">
+                {{ 'REGISTER.HAVE_ACCOUNT' | translate }}
+                <a routerLink="/login" href="/login">{{ 'REGISTER.LOGIN_LINK' | translate }}</a>
+              </div>
+
+            </form>
+          </mat-card-content>
+        </mat-card>

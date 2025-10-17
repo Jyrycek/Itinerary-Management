@@ -1,0 +1,65 @@
+<mat-card class="profile-container">
+  <mat-card-header class="profile-header">
+    <div class="profile-image">
+      @if (user.profileImageUrl) {
+        <img [src]="user.profileImageUrl" alt="Profilová fotka" />
+      }
+      <input type="file" id="file-upload" (change)="onFileChange($event)" accept=".png, .jpeg, .jpg" />
+      <label matTooltip="Nahrát obrázek" matTooltipPosition="below" for="file-upload" class="file-upload-button">
+        <mat-icon>upload</mat-icon>
+      </label>
+    </div>
+    <div class="profile-info">
+      <mat-card-title class="user-name">{{ user.firstName }} {{ user.lastName }}</mat-card-title>
+      <mat-card-subtitle class="user-role">{{ user.role }}</mat-card-subtitle>
+    </div>
+
+    <div class="edit-icon-wrapper">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="edit-icon">
+        <mat-icon matTooltip="Možnosti" matTooltipPosition="left">more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openEditDialog()">
+          <mat-icon>edit</mat-icon>
+          <span>Upravit profil</span>
+        </button>
+        <button mat-menu-item (click)="openChangePasswordDialog()">
+          <mat-icon>lock</mat-icon>
+          <span>Změnit heslo</span>
+        </button>
+      </mat-menu>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="profile-details">
+      <h3 class="section-title">Osobní údaje</h3>
+      <div class="user-info">
+        <div class="user-info-row">
+          <mat-icon>person</mat-icon>
+          <span class="info-label">Jméno:</span>
+          <span class="info-value">{{ user.firstName }}</span>
+        </div>
+        <div class="user-info-row">
+          <mat-icon>person</mat-icon>
+          <span class="info-label">Příjmení:</span>
+          <span class="info-value">{{ user.lastName }}</span>
+        </div>
+      </div>
+
+      <h3 class="section-title">Údaje o účtu</h3>
+      <div class="user-info">
+        <div class="user-info-row">
+          <mat-icon>email</mat-icon>
+          <span class="info-label">Email:</span>
+          <span class="info-value">{{ user.email }}</span>
+        </div>
+        <div class="user-info-row">
+            <mat-icon>calendar_today</mat-icon>
+            <span class="info-label">Vytvořeno:</span>
+            <span class="info-value">{{ user.createdAt | customDate }}</span>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

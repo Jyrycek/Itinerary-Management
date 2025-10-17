@@ -1,0 +1,6 @@
+@ItineraryManagement.Server_HostAddress = http://localhost:5153
+
+GET {{ItineraryManagement.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

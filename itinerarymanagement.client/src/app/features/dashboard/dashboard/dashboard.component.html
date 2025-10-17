@@ -1,0 +1,75 @@
+<div class="projects-container projects-list">
+    <div class="projects-header">
+        <div class="header-left">
+            <h2 class="page-title">{{ 'PROJECTS.TITLE' | translate }}</h2>
+            <button mat-icon-button matTooltip="{{ 'PROJECTS.ADD_TOOLTIP' | translate }}" matTooltipPosition="right" class="add-button" (click)="addProject()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div class="header-right">
+            <button mat-icon-button
+                    class="toggle-button"
+                    (click)="toggleProjectsList()"
+                    [matTooltip]="projectsListVisible ? ('PROJECTS.HIDE' | translate) : ('PROJECTS.SHOW' | translate)"
+                    matTooltipPosition="left">
+                <mat-icon>{{ projectsListVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="line-container">
+        <div class="header-line"></div>
+    </div>
+
+    @if (!projectsListVisible && projects.length > 0) {
+    <span class="no-projects">
+        ({{ projects.length }} {{ 'PROJECTS.COUNT' | translate }})
+    </span>
+    }
+
+    @if (projectsListVisible) {
+    <div class="projects-list">
+        <div class="projects-zone-container">
+            <div class="projects-zone">
+                @for (project of projects; track project) {
+                <div class="project-card">
+                    <mat-card class="clickable-card" (click)="openProject(project)">
+                        <mat-card-header>
+                            @if (project.imageUrl) {
+                            <img alt="Obrázek projektu" [src]="project.imageUrl" class="project-image no-select">
+                            }
+                            <div class="project-info">
+                                <mat-card-title>{{ project.title }}</mat-card-title>
+                                <mat-card-subtitle>{{ project.startDate | date:'dd.MM.yyyy' }} - {{ project.endDate | date:'dd.MM.yyyy' }}</mat-card-subtitle>
+                            </div>
+                            <button matTooltip="{{ 'PROJECTS.MORE_TOOLTIP' | translate }}" matTooltipPosition="below" mat-icon-button [matMenuTriggerFor]="menu" class="menu-button" (click)="$event.stopPropagation()">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="editProject(project)">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>{{ 'PROJECTS.EDIT' | translate }}</span>
+                                </button>
+                                <button mat-menu-item class="delete-button" (click)="deleteProject(project)">
+                                    <mat-icon>delete</mat-icon>
+                                    <span>{{ 'PROJECTS.DELETE' | translate }}</span>
+                                </button>
+                            </mat-menu>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
+                }
+            </div>
+        </div>
+        @if (projects.length === 0) {
+        <div class="no-projects">
+            <p>{{ 'PROJECTS.NONE_FOUND' | translate }}</p>
+        </div>
+        }
+    </div>
+    }
+
+    <div class="line-container">
+        <div class="footer-line"></div>
+    </div>
+</div>

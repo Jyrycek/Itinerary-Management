@@ -1,0 +1,41 @@
+.custom-button {
+  border-radius: 4px;
+  width: 100%;
+}
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.login-container {
+  max-width: 400px;
+  width: calc(100% - 20px);
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  margin-top: 64px;
+}
+
+
+.centered-title {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.login-link {
+  text-align: center;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+}

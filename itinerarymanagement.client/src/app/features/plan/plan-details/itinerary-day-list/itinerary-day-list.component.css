@@ -1,0 +1,780 @@
+.container {
+  display: flex;
+  height: calc(100vh - 64px);
+  width: 100%;
+  overflow: auto;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  position: relative;
+  display: flex
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  z-index: 10
+}
+
+mat-card {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 2px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15)
+}
+
+.button-place {
+  margin-bottom: 20px
+}
+
+.drag-handle {
+  cursor: grab;
+  font-size: 24px;
+  color: #888;
+  margin-left: auto;
+  transition: color .3s ease;
+  position: absolute;
+  top: 15px;
+  right: 5px;
+  z-index: 1
+}
+
+  .drag-handle:hover {
+    color: #333
+  }
+
+mat-card-title {
+  font-size: 22px;
+  font-weight: bolder;
+  color: #333;
+  margin: 0;
+  padding-bottom: 5px;
+  position: relative;
+  text-align: center
+}
+
+mat-card-content p {
+  color: #555;
+  line-height: 1.5;
+  text-align: left;
+  margin-top: -22px
+}
+
+.coordinates {
+  font-size: .85rem;
+  color: #666;
+  position: relative;
+  top: -6px
+}
+
+mat-card-header {
+  flex-direction: column
+}
+
+.delete-icon {
+  color: #888;
+  margin-left: auto
+}
+
+.place-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 0;
+  margin-top: 0 !important
+}
+
+.item-title {
+  font-size: 1.1em;
+  font-family: Arial,sans-serif;
+  font-weight: bolder
+}
+
+.action-buttons {
+  margin-left: auto;
+  display: flex;
+  align-items: center
+}
+
+.sort-button {
+  margin-right: 6px
+}
+
+.add-day-button {
+  margin-left: 6px
+}
+
+.itinerary-container {
+  font-family: Roboto,sans-serif;
+  color: #333
+}
+
+.place-card {
+  margin-bottom: 10px
+}
+
+.mat-card-actions {
+  justify-content: space-between
+}
+
+.mat-menu-content {
+  display: flex;
+  flex-direction: column
+}
+
+.item-title {
+  font-size: 1.3em;
+  color: #333
+}
+
+.mat-card-actions button {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px 20px 10px 20px;
+  transition: background-color .3s ease
+}
+
+  .mat-card-actions button:hover {
+    background-color: #0056b3
+  }
+
+.add-place-itinerary-cursor {
+  cursor: pointer;
+  position: sticky
+}
+
+.itinerary-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  position: relative
+}
+
+  .itinerary-day-header .day-title {
+    font-size: 1.3em;
+    color: #333;
+    font-weight: 700;
+    margin-right: 10px
+  }
+
+  .itinerary-day-header .icon {
+    font-size: 24px;
+    color: #007bff
+  }
+  .itinerary-day-header .datetime-title {
+    margin-left: 10px;
+    font-size: 0.8em;
+  }
+
+  .itinerary-day-content {
+    padding: 0 16px 16px 16px;
+    margin-top: -10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    align-items: center;
+    width: 100%
+  }
+
+.place-card {
+  width: 100%
+}
+
+.place-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-top: 10px
+}
+
+.title-header {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10
+}
+
+.place-small-card {
+  border: none;
+  box-shadow: none;
+  background-color: #f9f9f9
+}
+
+.place-small-card-content {
+  display: block;
+  padding: 8px;
+  padding-bottom: 0 !important;
+  padding-top: 8px;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+  box-sizing: border-box
+}
+
+.place-image-small {
+  float: left;
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 4px;
+  display: block;
+  margin-right: 12px;
+  margin-top: -2px;
+  cursor: pointer;
+  position:relative;
+  z-index: 2;
+}
+
+.place-info-small {
+  padding-right: 5px;
+  padding-left: 4px;
+  position: relative;
+  margin-bottom: -7px;
+}
+
+.coordinates-small {
+  font-size: .7em;
+  color: #888;
+  text-align: center;
+  margin-top: 0px
+}
+
+.place-title-small {
+  font-size: .85em;
+  font-weight: 700;
+  text-align: center;
+  margin-top: -5px;
+  hyphens: auto;
+  word-wrap: break-word;
+  cursor: pointer;
+}
+
+.place-description-small {
+  font-size: .75em;
+  color: #666;
+  text-align: left;
+  line-height: 1.2em;
+  margin-top: 0;
+  padding-right: 8px;
+  hyphens: auto;
+  word-wrap: break-word;
+}
+
+.place-day-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-right: 0;
+}
+
+.place-day-icon {
+  font-size: 22px
+}
+
+.drag-handle-day {
+  font-size: 24px;
+  top: 4px
+}
+
+@media (max-width:768px) {
+  .map-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform .3s ease;
+    transform: translateX(100%)
+  }
+
+    .map-container:not(.map-hidden) {
+      transform: translateX(0)
+    }
+
+  .map {
+    height: 100%;
+    margin-top: 62px;
+    width: 100%;
+    position: relative
+  }
+
+  .container {
+    flex-direction: column
+  }
+}
+
+.tag {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 4px;
+  display: inline-block
+}
+
+.tags-container {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center
+}
+
+.tags-container-itinerary {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center
+}
+
+.tag-itinerary {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 3px;
+  font-size: 12px;
+  display: inline-block
+}
+
+.place-connector-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -12px;
+  margin-bottom: -12px;
+  position: relative
+}
+
+.distance-line-vertical-up {
+  width: 1px;
+  height: 32px;
+  background-color: #dcdcdc;
+  position: relative;
+  z-index: 0;
+  margin-top: -6px;
+}
+
+.distance-line-vertical-down {
+  width: 1px;
+  height: 32px;
+  background-color: #dcdcdc;
+  position: relative;
+  z-index: 0;
+  margin-bottom: -6px;
+}
+
+.distance-info-vertical {
+  font-size: .75em;
+  color: #333;
+  background-color: #fff;
+  padding: 1px 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-80%);
+  z-index: 1;
+  white-space: nowrap;
+  text-align: center
+}
+
+.itinerary-day-container {
+  margin-top: 30px;
+  margin-bottom: 40px
+}
+
+.map2 {
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex
+}
+
+.custom-tag-color {
+  color: var(--mat-chip-label-text-color) !important
+}
+
+@media (max-width:768px) {
+  .action-buttons {
+    margin-left: 0;
+    margin-top: 10px
+  }
+}
+
+.add-place-button {
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.3)
+}
+
+.custom-button {
+  font-size: 16px;
+  transition: background-color .3s ease,transform .2s ease
+}
+
+  .custom-button:hover {
+    transform: translateY(-1px)
+  }
+
+  .custom-button:active {
+    transform: translateY(1px)
+  }
+
+.progress-bar {
+  max-width: 24px;
+  max-height: 24px;
+  margin-right: 8px
+}
+
+.custom-button {
+  font-size: 16px;
+  transition: background-color .3s ease,transform .2s ease
+}
+
+  .custom-button:hover {
+    transform: translateY(-1px)
+  }
+
+  .custom-button:active {
+    transform: translateY(1px)
+  }
+
+.add-place-button {
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.3)
+}
+
+.coordinates {
+  font-size: .85rem;
+  color: #666;
+  position: relative;
+  top: -8px
+}
+
+.tags-container {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center
+}
+
+.tag {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 4px;
+  display: inline-block
+}
+
+
+
+mat-card-title {
+  font-size: 22px;
+  font-weight: bolder;
+  color: #333;
+  text-align: center
+}
+
+mat-card-header {
+  flex-direction: column
+}
+
+.mat-card-actions {
+  justify-content: space-between
+}
+
+  .mat-card-actions button {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    transition: background-color .3s ease
+  }
+
+    .mat-card-actions button:hover {
+      background-color: #0056b3
+    }
+
+mat-card-content p {
+  color: #555;
+  line-height: 1.5;
+  text-align: left;
+  margin-top: -22px
+}
+
+.action-button {
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color .2s ease,transform .1s ease;
+  box-shadow: none;
+  margin: 0 4px
+}
+
+  .action-button:hover {
+    transform: translateY(-1px)
+  }
+
+  .action-button:active {
+    transform: translateY(0)
+  }
+
+::ng-deep .mdc-evolution-chip__text-label {
+  color: var(--your-tag-color) !important;
+}
+
+::ng-deep .mdc-list-item__primary-text {
+  color: var(--your-tag-color) !important;
+}
+
+.cdk-drag-preview .drag-handle,
+.cdk-drag-handle-dragging {
+  color: #333;
+  cursor: grabbing;
+}
+
+.cdk-drag-preview {
+  cursor: grabbing;
+}
+
+.itinerary-card.cdk-drag-preview {
+  padding-bottom: 20px;
+  margin-top: -16px !important;
+}
+
+.cdk-drag-preview {
+  transform: scale(1.01);
+  overflow: hidden;
+}
+
+.cdk-drag-placeholder {
+  visibility: hidden;
+}
+
+.cdk-drag-animating {
+  transition: transform 0.01s ease-in-out;
+}
+
+.cdk-drag-preview {
+  transform: scale(1.01);
+  overflow: hidden;
+}
+
+.cdk-drag-placeholder {
+  visibility: hidden;
+}
+
+.cdk-drag-animating {
+  transition: transform 0.01s ease-in-out;
+}
+
+.place-card-drag.cdk-drag-preview {
+  margin-top: -10px !important;
+}
+
+.mat-mdc-card-header {
+  padding-top: 0;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* Max výšky menu pro zaskrkavani míst pro den*/
+::ng-deep .mat-mdc-menu-panel {
+    max-height: 350px;
+    max-width: 350px;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+}
+
+.image-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #555;
+}
+
+  .image-btn:hover {
+    color: black;
+  }
+
+.day-settings {
+    margin-left: 5px;
+}
+
+.time-required {
+  position: absolute;
+  top: -26px;
+  left: calc(50% + 40px);
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: white;
+  background-color: #005CBB;
+  padding: 2px 6px;
+  white-space: nowrap;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  font-family: Roboto, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  .time-required mat-icon {
+    font-size: 20px;
+    margin-right: 6px;
+    color: white;
+    margin-top: 2px;
+  }
+
+.opening-hours-small,
+.website-small {
+  display: flex;
+  align-items: center;
+  font-size: 0.7em;
+  color: #555;
+}
+
+  .opening-hours-small mat-icon,
+  .website-small mat-icon {
+    font-size: 16px;
+    margin-right: 6px;
+    color: #005CBB;
+  }
+
+  .website-small a {
+    color: #005CBB;
+    text-decoration: none;
+  }
+
+    .website-small a:hover {
+      text-decoration: underline;
+    }
+
+.centered-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.opening-hours-small {
+    margin-bottom: 0;
+}
+
+.website-small {
+    margin-top: 0;
+}
+
+.custom-transport-picker-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.transport-icons {
+  display: flex;
+  gap: 6px;
+}
+
+  .transport-icons button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    transition: background-color 0.2s ease;
+    padding: 0;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+    .transport-icons button.active {
+      background-color: #1976d2;
+      color: white;
+    }
+
+    .transport-icons button:not(.active):hover {
+      background-color: #e0e0e0;
+    }
+
+    .transport-icons button mat-icon {
+      font-size: 15px;
+      width: 15px;
+      height: 15px;
+      line-height: 15px;
+    }
+
+.transport-divider {
+  height: 20px;
+  width: 1px;
+  background-color: #ccc;
+}
+
+.distance-km {
+  font-size: 0.78em;
+  background-color: #fff;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+
+.weather-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #555;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  letter-spacing: 0.2px;
+  margin-right: 6px;
+  line-height: 1;
+}
+
+
+.day-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weather-icon-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+  .weather-icon-container .wi {
+    font-size: 26px;
+    margin-right: 8px;
+    margin-bottom: 6px;
+  }

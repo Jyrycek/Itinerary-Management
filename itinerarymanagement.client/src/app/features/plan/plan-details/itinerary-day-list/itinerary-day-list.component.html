@@ -1,0 +1,160 @@
+<div class="itinerary-container">
+  @for (day of itineraryDays; track trackByIndex($index)) {
+    <div class="itinerary-day-container" id="{{ 'day-' + day.id }}">
+      <mat-card class="day-card" [ngStyle]="{'background-color': 'white', 'margin': '15px 0'}">
+        <mat-card-header class="title-header">
+          <mat-card-title class="itinerary-day-header">
+            <div class="add-place-itinerary-cursor" (click)="openDayDialog(day)">{{ day.formattedFullDate }}</div>
+            @if(day.startTime && day.endTime){
+              <span class="datetime-title">({{ day.startTime | timeFormat }} - {{ day.endTime | timeFormat }})</span>
+            }
+            <button mat-icon-button class="day-settings" matTooltip="Nastavení času dne" matTooltipPosition="right" (click)="openDaySettingsDialog(day)">
+              <mat-icon>settings</mat-icon>
+            </button>
+            <button matTooltip="Přidat místo" matTooltipPosition="right" mat-icon-button color="primary" [matMenuTriggerFor]="addDayMenu" class="add-day-button custom-menu-panel">
+              <mat-icon class="place-day-icon">add</mat-icon>
+            </button>
+            <mat-menu #addDayMenu="matMenu">
+              @for (place of places; track place.id) {
+                <button mat-menu-item>
+                  @if (place?.id && day?.placeSelections) {
+                    <mat-checkbox [(ngModel)]="day.placeSelections[place.id]"
+                      (change)="togglePlaceInDay(place, day)">
+                      {{ place.title }}
+                    </mat-checkbox>
+                  }
+                </button>
+              }
+
+            </mat-menu>
+            <div class="action-buttons">
+              @if (weatherByDayId[day.id]; as w) {
+                <div class="weather-icon-container">
+                  <i class="wi"
+                    [ngClass]="getWeatherIconClass(w.code)">
+                  </i>
+                  <span class="weather-text">{{ w.tempMin }}°C / {{ w.tempMax }}°C</span>
+                </div>
+              }
+              @if (day.isLoadingPath) {
+                <mat-spinner mode="indeterminate" class="progress-bar"></mat-spinner>
+              }
+              @else {
+              <button matTooltip="Seřadit" matTooltipPosition="below" mat-icon-button color="primary" class="sort-button" (click)="openRouteSettingsDialog(day.id)">
+                <mat-icon class="place-day-icon">swap_vert</mat-icon>
+              </button>
+            }
+          </div>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="itinerary-day-content">
+        @if (day.places && day.places.length > 0) {
+          <div cdkDropList (cdkDropListDropped)="dropPlace($event, day)">
+            @for (place of day.places; track trackByIndex(i); let i = $index) {
+              <div>
+                <div cdkDrag class="place-small-container itinerary-card" cdkDragLockAxis="y"
+                  (mouseenter)="highlightMarkersByPlace([place.id])"
+                  (mouseleave)="highlightMarkersByPlace(null)">
+                  <mat-card class="place-small-card">
+                    <mat-card-content class="place-small-card-content">
+                      <mat-icon cdkDragHandle class="drag-handle drag-handle-day">drag_indicator</mat-icon>
+                      @if (place.placeImages.length > 0) {
+                        <img alt="" [src]="apiUrl + place.placeImages[0].id + '?width=0&height=0&maxWidth=80&maxHeight=80'" class="place-image-small" (click)="openPlaceDetailDialog(place)">
+                      }
+                      <div class="time-required" [ngStyle]="{ 'z-index': i === 0 ? 10 : 9 }">
+                        <mat-icon>schedule</mat-icon>
+                        <span>{{ place.visitDuration }} minut</span>
+                      </div>
+                      <div class="place-info-small">
+                        <div class="place-title-small" (click)="openPlaceDetailDialog(place)">
+                          {{ place.title }}
+                        </div>
+                        <div class="coordinates-small">
+                          {{ decimalToDMS(place.latitude, true) }}, {{ decimalToDMS(place.longitude, false) }}
+                        </div>
+                        <div class="place-description-small">
+                          {{ place.description }}
+                        </div>
+                        @if(place.openingHours){
+                          @if (place.openingHours) {
+                            <div class="opening-hours-small">
+                              <mat-icon class="small-icon centered-icon">schedule</mat-icon>
+                              <span>{{ place.openingHours }}</span>
+                            </div>
+                          }
+                        }
+                        @if(place.website) {
+                          @if (place.website) {
+                            <div class="website-small">
+                              <mat-icon class="small-icon centered-icon">public</mat-icon>
+                              <a [href]="place.website" target="_blank" rel="noopener noreferrer">{{ place.website }}</a>
+                            </div>
+                          }
+                        }
+                        @if(place.tags && place.tags.length > 0){
+                          <div class="tags-container-itinerary">
+                            @for (tag of place.tags; track tag) {
+                              <span class="tag-itinerary">{{ tag.name }}</span>
+                            }
+                          </div>
+                        }
+                      </div>
+                      <mat-card-actions class="place-day-actions">
+                        <button mat-icon-button matTooltip="Zobrazit na mapě" matTooltipPosition="above" (click)="markPlaceOnMap([place.longitude, place.latitude])" class="right-buttons">
+                          <mat-icon class="place-day-icon">place</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Více" class="place-day-icon" matTooltipPosition="above" [matMenuTriggerFor]="itineraryDayMenu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #itineraryDayMenu="matMenu">
+                          <button mat-menu-item (click)="removePlaceFromDay(day, place)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Odstranit</span>
+                          </button>
+                        </mat-menu>
+                      </mat-card-actions>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+                @if (i < day.places.length - 1 && day.places.length > 0) {
+                  <div class="place-connector-vertical">
+                    <div class="distance-line-vertical-up"></div>
+                    <div class="distance-info-vertical custom-transport-picker-inline">
+                      <div class="transport-icons">
+                        @for (mode of transportOptions; track mode) {
+                          <button
+                            [class.active]="getActiveMode(day, i) === mode.id"
+                            (click)="onSelectTransportMode(day, i, mode.id)"
+                            mat-icon-button
+                            disableRipple
+                            matTooltip="{{ mode.label }}">
+                            <mat-icon>{{ mode.icon }}</mat-icon>
+                          </button>
+                        }
+                      </div>
+                      <div class="transport-divider"></div>
+                      <span class="distance-km">
+                        {{
+                        calculateDistances(
+                        day.places[i].latitude, day.places[i].longitude,
+                        day.places[i+1].latitude, day.places[i+1].longitude
+                        ) | number:'1.1-2'
+                        }} km
+                      </span>
+                    </div>
+                    <div class="distance-line-vertical-down"></div>
+                  </div>
+                }
+
+
+              </div>
+            }
+          </div>
+
+        }
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+}
+</div>

@@ -1,0 +1,56 @@
+<div class="popup-content" tabindex="-1">
+  @if (place) {
+    <h6 class="text-title" (click)="openPlaceDetailDialog(place)">{{ place.title }}</h6>
+  }
+
+  @if (place && place.placeImages && place.placeImages.length > 0) {
+    <div class="image-container">
+      @if (place.placeImages.length > 1) {
+        <button tabindex="0" (click)="prevImage()" class="image-nav-button left">
+          <mat-icon class="small-icon">chevron_left</mat-icon>
+        </button>
+      }
+
+      @if (isLoading) {
+        <div class="loading-spinner">
+          <mat-spinner strokeWidth="4"></mat-spinner>
+        </div>
+      }
+      <img [src]="apiUrl + place.placeImages[currentImageIndex].id + '?width=0&height=0&maxWidth=200&maxHeight=100'"
+        class="image-display" (click)="openPlaceDetailDialog(place)" alt="Obrázek místa"
+        [class.hidden]="isLoading"
+        (load)="onImageLoaded()"
+        (error)="onImageError()" />
+
+      <div class="image-counter">
+        {{ currentImageIndex + 1 }} / {{ place.placeImages.length }}
+      </div>
+
+      @if (place.placeImages.length > 1) {
+        <button tabindex="0" (click)="nextImage()" class="image-nav-button right">
+          <mat-icon class="small-icon">chevron_right</mat-icon>
+        </button>
+      }
+    </div>
+  }
+
+  <p class="popup-description">{{ place?.description }}</p>
+
+  @if (showButtons) {
+    <div class="button-container" tabindex="0">
+      <button mat-icon-button (click)="onEditPlace()">
+        <mat-icon class="edit-icon-popup">edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="onDeletePlace()">
+        <mat-icon class="edit-icon-popup">delete</mat-icon>
+      </button>
+      <button class="close-button" (click)="onClosePopup()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  } @else {
+    <button class="close-button" (click)="onClosePopup()" tabindex="0">
+      <mat-icon>close</mat-icon>
+    </button>
+  }
+</div>

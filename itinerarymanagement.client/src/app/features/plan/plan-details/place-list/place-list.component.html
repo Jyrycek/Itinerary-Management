@@ -1,0 +1,317 @@
+@if (!isAddingPlaceFormOnTop)
+  {
+  <button class="custom-button add-place-button" mat-flat-button color="primary" (click)="showAddPlaceFormPlus(0)">
+    Přidat nové místo
+  </button>
+}
+<div cdkDropList (cdkDropListDropped)="drop($event)" class="drop-list">
+  @for (place of places; track place.id; let i = $index) {
+    <div id="{{ 'place-' + place.id }}">
+      @if (i > 0) {
+        <div class="add-between-cards-container" (mouseenter)="hoverIndex = i" (mouseleave)="hoverIndex = -1">
+          @if (hoverIndex === i && clickedPlusIndex !== i) {
+            <button mat-icon-button class="add-between-cards-button" (click)="showAddPlaceFormPlus(i)">
+              <mat-icon>add_circle_outline</mat-icon>
+            </button>
+          }
+        </div>
+      }
+      <div class="draggable-item place-card-drag" cdkDrag cdkDragLockAxis="y" [cdkDragDisabled]="!isDraggingAllowed(i)"
+        (mouseenter)="highlightMarkersByPlace([place.id])"
+        (mouseleave)="highlightMarkersByPlace(null)">
+        <mat-card>
+          <mat-card-content class="content-place">
+            @if (place && place.placeImages && place.placeImages.length > 0 && place.placeImages[place.currentShownImageIndex]) {
+              <div class="image-container">
+                @if (place.placeImages.length > 1) {
+                  <button (click)="place.prevImage()" class="image-nav-button left">
+                    <mat-icon class="small-icon">chevron_left</mat-icon>
+                  </button>
+                }
+
+                @if (place.loadingImage) {
+                  <div class="loading-overlay">
+                    <mat-progress-spinner mode="indeterminate" [strokeWidth]="5"></mat-progress-spinner>
+                  </div>
+                }
+
+                <img alt="" [src]="apiUrl + place.placeImages[place.currentShownImageIndex].id + '?width=120&height=120'"
+                  class="place-image clickable"
+                  [class.hidden]="place.loadingImage"
+                  (click)="openPlaceDetailDialog(place)"
+                             [ngClass]="{'place-image-edit': isEditingPlaceForm && editingPlaceIndex === i,
+         'place-image-default': !isEditingPlaceForm || editingPlaceIndex !== i}"
+                  (load)="onImageLoaded(place)">
+
+                  <div class="image-counter">
+                    {{ place.currentShownImageIndex + 1 }} / {{ place.placeImages.length }}
+                  </div>
+
+                  @if (place.placeImages.length > 1 && place?.nextImage) {
+                    <button (click)="place.nextImage()" class="image-nav-button right">
+                      <mat-icon class="small-icon">chevron_right</mat-icon>
+                    </button>
+                  }
+
+                </div>
+              }
+              @if (isEditingPlaceForm && editingPlaceIndex === i) {
+                <input type="file" id="file-upload" (change)="onFileChange($event, i, place.placeImages[place.currentShownImageIndex].id)" accept=".png, .jpeg, .jpg" />
+                <label class="file-upload-button" matTooltip="Nahrát obrázek" matTooltipPosition="below" for="file-upload">
+                  <mat-icon>upload</mat-icon>
+                </label>
+              }
+              <div class="order-circle" (click)="markPlaceOnMap([place.longitude, place.latitude])">{{ place.order }}</div>
+              @if ((!isEditingPlaceForm || editingPlaceIndex !== i) && (!isAddingPlaceFormBetween || addingEditingPlaceIndex !== i)) {
+                <div class="time-required">
+                  <mat-icon>schedule</mat-icon>
+                  <span>{{ place.visitDuration }} minut</span>
+                </div>
+              }
+              <form [formGroup]="editingPlaceForm" class="content-place-form">
+                <div class="coordinate-container">
+                  @if ((!isEditingPlaceForm || editingPlaceIndex !== i) && (!isAddingPlaceFormBetween || addingEditingPlaceIndex !== i)) {
+                    <div class="coordinates">
+                      {{ decimalToDMS(place.latitude, true) }}, {{ decimalToDMS(place.longitude, false) }}
+                    </div>
+                  }
+                </div>
+                @if ((!isEditingPlaceForm || editingPlaceIndex !== i) && (!isAddingPlaceFormBetween || addingEditingPlaceIndex !== i)) {
+                  <mat-card-header>
+                    <mat-card-title (click)="openPlaceDetailDialog(place)" class="clickable">
+                      {{ place.title }}
+                    </mat-card-title>
+                  </mat-card-header>
+                }
+                @if ((isEditingPlaceForm && editingPlaceIndex === i) || (isAddingPlaceFormBetween && addingEditingPlaceIndex === i)) {
+                  <div [ngClass]="(isAddingPlaceFormBetween && addingEditingPlaceIndex === i) ? 'coordinate-inputs-add' : 'coordinate-inputs'">
+                    <mat-form-field class="title-input" [ngClass]="(isAddingPlaceFormBetween && addingEditingPlaceIndex === i) ? 'title-width' : 'edit-width'">
+                      <mat-label>Název místa</mat-label>
+                      <input matInput formControlName="title" required />
+                      @if (editingPlaceForm.get('title')?.hasError('required')) {
+                        <mat-error>
+                          uložit
+                          Název místa je povinný
+                        </mat-error>
+                      }
+                      @if (editingPlaceForm.get('title')?.hasError('minlength')) {
+                        <mat-error>
+                          Název místa musí mít alespoň 3 znaky
+                        </mat-error>
+                      }
+                      @if (editingPlaceForm.get('title')?.hasError('maxlength')) {
+                        <mat-error>
+                          Název místa může mít maximálně 100 znaků
+                        </mat-error>
+                      }
+                    </mat-form-field>
+                    <mat-form-field class="time-input">
+                      <mat-label>Potřebný čas (min.)</mat-label>
+                      <input min="0" [defaultValue]="60" step="1" matInput type="number" formControlName="visitDuration" />
+                      @if (editingPlaceForm.get('visitDuration')?.hasError('min')) {
+                        <mat-error>
+                          Čas musí být kladné číslo
+                        </mat-error>
+                      }
+                    </mat-form-field>
+                  </div>
+                }
+                <div [ngClass]="(isAddingPlaceFormBetween && addingEditingPlaceIndex === i) ? 'coordinate-inputs-add' : 'coordinate-inputs'">
+                  @if ((isEditingPlaceForm && editingPlaceIndex === i) || (isAddingPlaceFormBetween && addingEditingPlaceIndex === i)) {
+                    <mat-form-field class="coordinate-input">
+                      <mat-label>Zeměpisná šířka</mat-label>
+                      <input matInput formControlName="latitude" required />
+                      @if (editingPlaceForm.controls['latitude'].hasError('required')) {
+                        <mat-error>
+                          Zeměpisná šířka je povinná
+                        </mat-error>
+                      }
+                      @if (editingPlaceForm.controls['latitude'].hasError('latitudeInvalid')) {
+                        <mat-error>
+                          Neplatná zeměpisná šířka. Zadejte hodnotu mezi -90 a 90
+                        </mat-error>
+                      }
+                    </mat-form-field>
+                  }
+                  @if ((isEditingPlaceForm && editingPlaceIndex === i) || (isAddingPlaceFormBetween && addingEditingPlaceIndex === i)) {
+                    <mat-form-field class="coordinate-input">
+                      <mat-label>Zeměpisná délka</mat-label>
+                      <input matInput formControlName="longitude" required />
+                      @if (editingPlaceForm.controls['longitude'].hasError('required')) {
+                        <mat-error>
+                          Zeměpisná délka je povinná
+                        </mat-error>
+                      }
+                      @if (editingPlaceForm.controls['longitude'].hasError('longitudeInvalid')) {
+                        <mat-error>
+                          Neplatná zeměpisná délka. Zadejte hodnotu mezi -180 a 180
+                        </mat-error>
+                      }
+                    </mat-form-field>
+                  }
+                  @if ((isEditingPlaceForm && editingPlaceIndex === i) || (isAddingPlaceFormBetween && addingEditingPlaceIndex === i)) {
+                    <button class="icon-marking" mat-icon-button [matTooltip]="isMarkingMode ? 'Zrušit vybíraní' : 'Vybrat na mapě'" matTooltipPosition="above" type="button" (click)="toggleMarkingMode(i)">
+                      <mat-icon>{{ isMarkingMode ? 'cancel' : 'add_location' }}</mat-icon>
+                    </button>
+                  }
+                </div>
+                @if ((!isEditingPlaceForm || editingPlaceIndex !== i) && (!isAddingPlaceFormBetween || addingEditingPlaceIndex !== i)) {
+                  <p class="place-description">{{ truncateDescription(place.description) }}</p>
+                }
+                @if ((isEditingPlaceForm && editingPlaceIndex === i) || (isAddingPlaceFormBetween && addingEditingPlaceIndex === i)) {
+                  <div class="textarea-with-icon">
+                    <mat-form-field class="full-width">
+                      <mat-label>Popis</mat-label>
+                      <textarea matInput formControlName="description" name="editPlaceDescription"></textarea>
+                    </mat-form-field>
+                    @if (!isLoadingDescription) {
+                      <button mat-icon-button
+                        matTooltip="Vygenerovat popis"
+                        matTooltipPosition="below"
+                        class="icon-button"
+                        (click)="generateDescription()">
+                        <mat-icon>auto_awesome</mat-icon>
+                      </button>
+                    }
+                    @else {
+                    <ng-container>
+                      <mat-progress-spinner diameter="24"
+                        mode="indeterminate"
+                        strokeWidth="3"
+                        class="spinner-icon">
+                      </mat-progress-spinner>
+                    </ng-container>
+                  }
+                </div>
+              }
+              @if ((!isEditingPlaceForm || editingPlaceIndex !== i) && (!isAddingPlaceFormBetween || addingEditingPlaceIndex !== i)) {
+                <div class="additional-info">
+                  @if(place.openingHours){
+                    <div class="opening-hours">
+                      <mat-icon class="centered-icon">schedule</mat-icon>
+                      <span>{{ place.openingHours }}</span>
+                    </div>
+                  }
+                  @if (place.website) {
+                    <div class="website">
+                      <mat-icon class="centered-icon">public</mat-icon>
+                      <a rel="noopener noreferrer" [href]="place.website" target="_blank">{{place.website}}</a>
+                    </div>
+                  }
+                </div>
+              }
+              @if ((isEditingPlaceForm && editingPlaceIndex === i) || (isAddingPlaceFormBetween && addingEditingPlaceIndex === i)) {
+                <div class="web-hours-inputs">
+                  <mat-form-field class="opening-hours-input">
+                    <mat-label>Otevírací doba</mat-label>
+                    <input matInput formControlName="openingHours" placeholder="Nov-Jan 09:00-16:00; Feb 09:00-17:00; Mar,Sep,Oct 09:00-18:00; Apr-Aug 09:00-19:00" />
+                  </mat-form-field>
+
+                  <mat-form-field class="website-input">
+                    <mat-label>Webová stránka</mat-label>
+                    <input matInput formControlName="website" placeholder="https://www.example.com" />
+                  </mat-form-field>
+                </div>
+              }
+              @if ((isEditingPlaceForm && editingPlaceIndex === i) || (isAddingPlaceFormBetween && addingEditingPlaceIndex === i)) {
+                <mat-form-field class="chip-list" appearance="fill">
+                  <mat-label>Štítky</mat-label>
+                  <mat-chip-grid #chipEditingGrid aria-label="Výběr štítků">
+                    @for (tag of places[i].tags; track trackByIndex(j); let j = $index) {
+                      <mat-chip-row (removed)="removeEditTag(tag, i)" (click)="openEditTagDialog(tag, i, j)" [ngStyle]="{ 'color': tag.color }">
+                        {{ tag.name }}
+                        <button matChipRemove [attr.aria-label]="'remove ' + tag.name">
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip-row>
+                    }
+                  </mat-chip-grid>
+                  <input name="tagInput"
+                    placeholder="Nový štítek"
+                    #tagInput
+                    [formControl]="editingTagnew"
+                    [matChipInputFor]="chipEditingGrid"
+                    [matAutocomplete]="auto"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="editTag($event, i)" />
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedEditTag($event, i)">
+                      @for (tag of filteredEditTags | async; track tag) {
+                        <mat-option [value]="tag">
+                          <span [ngStyle]="{ 'color': tag.color }">{{ tag.name }}</span>
+                        </mat-option>
+                      }
+                    </mat-autocomplete>
+                  </mat-form-field>
+                }
+              </form>
+              @if ((!isEditingPlaceForm || editingPlaceIndex !== i) && (!isAddingPlaceFormBetween || addingEditingPlaceIndex !== i)) {
+                <mat-icon cdkDragHandle class="drag-handle">drag_indicator</mat-icon>
+              }
+              @if ((!isEditingPlaceForm || editingPlaceIndex !== i) && (!isAddingPlaceFormBetween || addingEditingPlaceIndex !== i)) {
+                <div class="tags-container">
+                  @for (tag of place.tags; track tag) {
+                    <span class="tag" [ngStyle]="{ 'color': tag.color }">{{ tag.name }}</span>
+                  }
+                </div>
+              }
+            </mat-card-content>
+            <mat-card-actions class="centered-actions">
+              @if (!(!isEditingPlaceForm || editingPlaceIndex !== i) && (!isAddingPlaceFormBetween || addingEditingPlaceIndex !== i)) {
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+              }
+              @if (isAddingPlaceFormOnTop) {
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+              }
+              <div class="buttons-center">
+                @if ((isEditingPlaceForm && editingPlaceIndex === i) || (isAddingPlaceFormBetween && addingEditingPlaceIndex === i)) {
+                  <button mat-button color="primary" class="action-button" (click)="savePlace(i)">
+                    Uložit
+                  </button>
+                  <button mat-button color="warn" class="action-button" (click)="cancelEditingPlace(i)">
+                    Zrušit
+                  </button>
+                }
+              </div>
+              @if ((!isEditingPlaceForm || editingPlaceIndex !== i) && (!isAddingPlaceFormBetween || addingEditingPlaceIndex !== i)) {
+                <button mat-icon-button matTooltip="Upravit" matTooltipPosition="above" color="primary" (click)="editPlace(i)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              }
+              <button mat-icon-button color="accent" matTooltip="Zobrazit na mapě" matTooltipPosition="above" (click)="markPlaceOnMap([place.longitude, place.latitude])">
+                <mat-icon>place</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Více" matTooltipPosition="above" [matMenuTriggerFor]="placeMenu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #placeMenu="matMenu">
+                <button mat-menu-item [matMenuTriggerFor]="daysMenu">
+                  <mat-icon>label</mat-icon>
+                  <span>Označit</span>
+                </button>
+                <button mat-menu-item (click)="deletePlace(i)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Odstranit</span>
+                </button>
+              </mat-menu>
+              <mat-menu #daysMenu="matMenu" class="custom-menu-panel">
+                @for (day of itineraryDays; track day.id; let dayIndex = $index) {
+                  <button mat-menu-item>
+                    @if (place?.id && day?.placeSelections) {
+                      <mat-checkbox [(ngModel)]="day.placeSelections[place.id]"
+                        (change)="togglePlaceInDay(place, day)">
+                        {{ day.formattedDate }}
+                      </mat-checkbox>
+                    }
+                  </button>
+                }
+              </mat-menu>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    }
+  </div>

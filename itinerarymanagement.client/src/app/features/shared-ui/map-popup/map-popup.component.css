@@ -1,0 +1,121 @@
+.edit-icon-popup, .delete-icon-popup {
+  font-size: 22px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: -6px;
+}
+
+  .button-container:focus {
+    outline: none;
+  }
+
+.close-button {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  padding: 2px !important;
+}
+  .close-button:hover {
+    color: black;
+    transform: scale(1.02);
+  }
+
+  .close-button mat-icon {
+    font-size: 20px;
+  }
+
+.popup-content {
+  max-width: 200px;
+  text-align: center;
+}
+
+.text-title {
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.image-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-display {
+  max-width: 200px;
+  max-height: 100px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.image-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.left {
+  left: 0px;
+}
+
+.right {
+  right: 0px;
+}
+
+.small-icon {
+  color: white;
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.image-nav-button:hover .small-icon {
+  opacity: 1;
+}
+
+.image-counter {
+  position: absolute;
+  bottom: 3px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.popup-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hidden {
+  display: none;
+}

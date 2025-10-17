@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "secrets2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/jirigengela/providers/Microsoft.ServiceLinker/linkers/VaultUri_071077D934",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/ItineraryManagementKeys",
+      "type": "secrets.keyVault",
+      "connectionId": "VaultUri",
+      "dynamicId": null
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/jirigengela/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsUserDatabase_906418A6B2",
+      "secretStore": "AzureKeyVault",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/usersdatabaseserver/databases/usersdatabase",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:UserDatabase",
+      "dynamicId": null
+    },
+    "storage1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/jirigengela/providers/Microsoft.ServiceLinker/linkers/AccountStorage_C972EC0A99, /subscriptions/e59d6516-9409-4d2c-bcc1-9fe36a54813d/resourceGroups/sqldatabaze/providers/Microsoft.Web/sites/jirigengela/providers/Microsoft.ServiceLinker/linkers/AccountStorage_C509594A7C",
+      "secretStore": "AzureKeyVault",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/jirigengelastorage",
+      "type": "storage.azure",
+      "connectionId": "AccountStorage",
+      "dynamicId": null
+    }
+  }
+}

@@ -1,0 +1,143 @@
+.profile-container {
+  max-width: 800px;
+  width: calc(100% - 25px);
+  margin: 20px auto;
+  top: 50px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.profile-info {
+  margin-left: 20px;
+}
+
+.user-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.user-role {
+  font-size: 16px;
+  color: gray;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #005CBB;
+  padding-bottom: 5px;
+  color: #005CBB;
+}
+
+.user-info {
+  margin: 10px 0;
+}
+
+.user-info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 16px;
+  align-items: center;
+  padding: 10px;
+}
+
+  .user-info-row mat-icon {
+    color: #005CBB;
+    margin-right: 10px;
+  }
+
+.info-label {
+  flex-basis: 40%;
+  text-align: right;
+  font-weight: bold;
+  color: #333;
+}
+
+.info-value {
+  flex-basis: 50%;
+  text-align: left;
+  color: #555;
+}
+
+.custom-button {
+  border-radius: 4px;
+  width: 200px;
+  margin-top: 20px;
+}
+
+.profile-image {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #005CBB;
+    object-fit: cover;
+  }
+
+.file-upload-button {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background-color: #005CBB;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+}
+
+  .file-upload-button mat-icon {
+    margin: 0;
+  }
+
+  .file-upload-button:hover {
+    background-color: #003d80;
+  }
+
+  .file-upload-button:active {
+    background-color: #002966;
+  }
+
+#file-upload {
+  display: none;
+}
+.default-icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #005CBB;
+  object-fit: cover;
+}
+.edit-icon-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.edit-icon {
+  color: black;
+}
+

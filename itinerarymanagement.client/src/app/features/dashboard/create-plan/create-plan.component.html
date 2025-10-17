@@ -1,0 +1,90 @@
+<form [formGroup]="planForm" (ngSubmit)="startPlanning()">
+  <div class="create-plan-container">
+    <button tabindex="-1" mat-icon-button mat-dialog-close aria-label="Close" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <h2 class="page-title">
+      {{ isEditMode ? ('PLAN.TITLE_EDIT' | translate) : ('PLAN.TITLE_CREATE' | translate) }}
+    </h2>
+
+    <div class="form-with-image-right" [ngClass]="{'with-gap': isEditMode}">
+      <!-- Zobrazení obrázku v režimu úprav -->
+      <div class="image-container">
+        @if (isEditMode && imageUrl) {
+          <div class="image-preview-container">
+            <img [src]="imageUrl" class="image-preview" alt="Plan">
+            <input type="file" id="file-upload" (change)="onFileChange($event)" accept=".png, .jpeg, .jpg" />
+            <label matTooltip="{{ 'PLAN.UPLOAD_TOOLTIP' | translate }}" matTooltipPosition="below" for="file-upload" class="file-upload-button">
+              <mat-icon>upload</mat-icon>
+            </label>
+          </div>
+        }
+      </div>
+
+      <div class="form-fields">
+        <!-- Pole pro zadání destinace -->
+        <mat-form-field class="destination-field">
+          <mat-label>{{ 'PLAN.DESTINATION' | translate }}</mat-label>
+          <input matInput
+            [placeholder]="'PLAN.DESTINATION_PLACEHOLDER' | translate"
+            formControlName="destination"
+            maxlength="100" />
+          <mat-icon matPrefix>search</mat-icon>
+
+          @if (planForm.get('destination')?.hasError('required')) {
+            <mat-error>
+              {{ 'PLAN.DESTINATION_REQUIRED' | translate }}
+            </mat-error>
+          }
+          @if (planForm.get('destination')?.hasError('maxlength')) {
+            <mat-error>
+              {{ 'PLAN.DESTINATION_MAXLENGTH' | translate }}
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Datum od - do -->
+        <mat-form-field class="date-field full-width">
+          <mat-label>{{ 'PLAN.DATE_RANGE' | translate }}</mat-label>
+          <mat-icon matPrefix>event</mat-icon>
+
+          <mat-date-range-input [rangePicker]="dateRangePicker" formGroupName="dateRange">
+            <input matStartDate
+              [placeholder]="'PLAN.START_DATE_REQUIRED' | translate"
+              formControlName="startDate"
+              required />
+            <input matEndDate
+              [placeholder]="'PLAN.END_DATE_REQUIRED' | translate"
+              formControlName="endDate"
+              required />
+          </mat-date-range-input>
+
+          <mat-datepicker-toggle matSuffix [for]="dateRangePicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #dateRangePicker></mat-date-range-picker>
+
+          @if (planForm.get('dateRange.startDate')?.hasError('required')) {
+            <mat-error>
+              {{ 'PLAN.START_DATE_REQUIRED' | translate }}
+            </mat-error>
+          }
+          @if (planForm.get('dateRange.endDate')?.hasError('required')) {
+            <mat-error>
+              {{ 'PLAN.END_DATE_REQUIRED' | translate }}
+            </mat-error>
+          }
+          @if (planForm.get('dateRange.startDate')?.value && planForm.get('dateRange.endDate')?.value && planForm.get('dateRange.startDate')?.value && planForm.get('dateRange.endDate')?.value) {
+            <mat-error>
+              {{ 'PLAN.DATE_RANGE_INVALID' | translate }}
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Tlačítko pro přidání nebo úpravu plánu -->
+    <button mat-flat-button color="primary" class="custom-button" type="submit" [disabled]="!planForm.valid">
+      {{ isEditMode ? ('PLAN.BUTTON_SAVE' | translate) : ('PLAN.BUTTON_START' | translate) }}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>
+  Upravit profil
+    <button tabindex="-1" aria-hidden="true" mat-icon-button mat-dialog-close aria-label="Close" class="close-button">
+        <mat-icon>close</mat-icon>
+    </button>
+</h2>
+<div mat-dialog-content>
+  <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-icon matPrefix>person</mat-icon>
+      <mat-label>Jméno</mat-label>
+      <input tabindex="-1" matInput formControlName="firstName" required>
+      @if (firstName?.invalid && (firstName?.dirty || firstName?.touched)) {
+        <mat-error>
+          @if (firstName?.errors?.['required']) {
+            <span>Jméno je povinné.</span>
+          }
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-icon matPrefix>person</mat-icon>
+      <mat-label>Příjmení</mat-label>
+      <input tabindex="-1" matInput formControlName="lastName" required>
+      @if (lastName?.invalid && (lastName?.dirty || lastName?.touched)) {
+        <mat-error>
+          @if (lastName?.errors?.['required']) {
+            <span>Příjmení je povinné.</span>
+          }
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-icon matPrefix>email</mat-icon>
+      <mat-label>Email</mat-label>
+      <input tabindex="-1" matInput type="email" formControlName="email" required>
+      @if (email?.invalid && (email?.dirty || email?.touched)) {
+        <mat-error>
+          @if (email?.errors?.['required']) {
+            <span>Email je povinný.</span>
+          }
+          @if (email?.errors?.['email']) {
+            <span>Neplatný formát emailu.</span>
+          }
+        </mat-error>
+      }
+    </mat-form-field>
+    @if (error) {
+      <div class="error-message">{{ error }}</div>
+    }
+      <div class="dialog-buttons">
+          <button tabindex="-1" mat-button color="primary" class="action-button" [disabled]="editForm.invalid">
+              Uložit
+          </button>
+          <button tabindex="-1" mat-button color="warn" class="action-button" mat-dialog-close>
+              Zrušit
+          </button>
+      </div>
+  </form>
+</div>

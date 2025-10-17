@@ -1,0 +1,152 @@
+.map {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  display: flex;
+}
+
+.custom-button {
+  border-radius: 4px;
+}
+
+.progress-bar {
+  height: 36px !important;
+  width: 36px !important;
+  z-index: 100;
+}
+
+.map-button-top-icon {
+  color: black;
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  height: 36px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+.map-button-top-center {
+  z-index: 100;
+  color: black;
+  padding: 8px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+  .map-button-top-center:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  .map-button-top-center:focus {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+
+
+@media (max-width: 768px) {
+  .toggle-map-button {
+    display: block;
+  }
+
+    .toggle-map-button.map-open {
+      top: unset;
+      bottom: 10px;
+      right: 50%;
+      transform: translateX(50%);
+    }
+
+  .map {
+    height: 100vh;
+    margin-top: 56px;
+    width: 100%;
+    position: relative;
+  }
+}
+
+.button-wrapper {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center; 
+  gap: 4px;
+  z-index: 100;
+}
+
+.icon-top-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2px;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.disabled-button {
+  background-color: #d3d3d3;
+  color: #888;
+  cursor: not-allowed;
+}
+
+
+.button-text {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@media (min-width: 600px) {
+  .button-text {
+    display: inline;
+  }
+}
+
+.map-button-icon-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  z-index: 100;
+  color: black;
+  white-space: nowrap;
+  width: auto;
+}
+
+.map-styl-changer {
+  position: absolute;
+  z-index: 100;
+  bottom: 10px;
+  right: 40px;
+}
+
+.map-style-select {
+  border: none;
+  outline: none;
+  font-size: 12px;
+  padding-top: 6px;
+  padding-right: 2px;
+  padding-bottom: 6px;
+  padding-left: 6px;
+  height: 25px;
+  width: 90px;
+  color: black;
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border-right: 6px solid transparent;
+}
+
+  .map-style-select:focus {
+    outline: none;
+    border: none;
+    border-right: 6px solid transparent;
+  }
+
+  .map-style-select option {
+    font-size: 12px;
+    border: none;
+  }

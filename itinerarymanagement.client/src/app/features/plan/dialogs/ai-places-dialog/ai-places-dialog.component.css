@@ -1,0 +1,36 @@
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+::ng-deep .mat-mdc-dialog-container {
+  min-width: 100%;
+}
+
+.action-button {
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin: 0 4px;
+}
+
+  .action-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .action-button:active {
+    transform: translateY(0);
+  }
+
+.dialog-buttons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
